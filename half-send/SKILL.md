@@ -25,6 +25,8 @@ Tailor the questions to the actual task. Aim for complete coverage, not the fewe
 
 If a material decision is already clear from the user's request or project instructions, do not ask it again. Never request credentials in chat; use the approved secret-entry mechanism if a secret is genuinely needed.
 
+If the user specifies an order such as skills first, finish that phase and report its actual validation status before moving to implementation. Keep a brief decision receipt separating answered decisions from missing access/configuration. Once intake is complete, explicitly say it is complete; do not make the user infer this from ongoing tool activity.
+
 ## 2. Confirm the execution brief
 
 After the user answers, summarize the goal, acceptance criteria, scope, assumptions/defaults, proof to collect, and exact side effects they authorized. Ask for a clear go-ahead before starting. If their answer to the intake already explicitly approves that summarized plan, treat that as the go-ahead and proceed without a redundant approval round.

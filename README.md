@@ -2,30 +2,20 @@
 
 # The Mbappe Special
 
-Created in [T3 Code](https://t3.codes).
+Made these for how I like working in [T3 Code](https://t3.codes). Ask the important stuff first, then get on with it.
 
-## Half-send
-
-The [`half-send` skill](half-send/SKILL.md) gathers the decisions and approvals needed for a task before starting, then completes the approved work autonomously while you are away.
-
-### Download and install
-
-On GitHub, open [`half-send/SKILL.md`](half-send/SKILL.md) and choose **Raw** to download the skill file, or choose **Code → Download ZIP** to download the repository. To install it for Codex, place the file at:
-
-```text
-$CODEX_HOME/skills/half-send/SKILL.md
-```
-
-If `CODEX_HOME` is not set, use `~/.codex/skills/half-send/SKILL.md`. Create the `half-send` folder if needed. Then invoke it by saying **half-send** or `$half-send` and describe the task.
-
-Reusable preferences and past-miss notes belong in `local-docs/`. Those two local files are excluded from Git so they stay on this machine and are not pushed to GitHub.
-
-## Russelore and RDP Commit
-
-Install both writing skills in a project with the [Skills CLI](https://github.com/vercel-labs/skills):
+| Skill | What it does |
+| --- | --- |
+| [half-send](half-send/SKILL.md) | Questions first, approved work while I’m away |
+| [russelore](skills/russelore/SKILL.md) | My writing voice |
+| [rdp-commit](skills/rdp-commit/SKILL.md) | Short casual commit names |
+| [tagged-release](skills/tagged-release/SKILL.md) | Sol releases, Luna waits, Sol handles the result |
+| [eyes-of-render](skills/eyes-of-render/SKILL.md) | Clean folders and a consistent, checked UI |
+| [readme-rdp](skills/readme-rdp/SKILL.md) | A little backstory, screenshot, simple setup |
+| [grilling-rdp](skills/grilling-rdp/SKILL.md) | Important questions before implementation |
 
 ```sh
-npx skills add wrestle-R/Mbappe-Special --skill russelore --skill rdp-commit
+npx skills add wrestle-R/Mbappe-Special
 ```
 
-This fetches the selected skills from the repository. You do not need to download a ZIP.
+Pick the skills you want. Tagged-release needs a host that supports model delegation and completion handoffs. Private working notes stay in ignored `local-docs/`.
