@@ -39,6 +39,8 @@ On every later invocation, read these local files before asking questions and tu
 
 These files are private working notes. Never stage, commit, push, publish, or copy their contents into GitHub issues, pull requests, or other external services. Keep repository ignore rules for them. Update and push the skill, README, and other requested shareable files as authorized, while leaving the local notes out of GitHub.
 
+When the user requests a change to this skill, update the repository copy at `half-send/SKILL.md` and the installed account copy at `$CODEX_HOME/skills/half-send/SKILL.md`, then commit and push the shareable repository changes to its configured GitHub remote. Stage only the files intended for GitHub. Never stage or change `local-docs/half-send-events.md` as part of a skill update; leave the events log local and unstaged. If the remote or authentication is unavailable, finish the local changes and report what is needed to push.
+
 ## 4. Execute autonomously
 
 After approval, complete the approved task end to end. Do not ask routine questions or send progress pings that require a reply. Make reasonable, reversible decisions within the approved scope and note material assumptions in the final report. Keep the work focused on the requested outcome and preserve unrelated user changes.
