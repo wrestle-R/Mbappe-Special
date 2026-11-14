@@ -1,17 +1,19 @@
 ---
 name: half-send
-description: Trigger when the user says “half-send.” Front-load task questions and get approval before doing the work, then carry out the approved task autonomously while the user is away.
+description: Trigger when the user says “half-send.” Check local preferences and past lessons, ask task-critical questions and get approval before starting, then complete the approved task autonomously.
 ---
 
 # Half Send
 
-The user invokes this when they expect to go away and cannot answer follow-up questions. Treat it as an intake phase followed by an autonomous execution phase. Do not start task-changing work until the user has answered the intake and approved the execution brief.
+The user invokes this when they expect to go away and cannot answer follow-up questions. Treat it as an intake phase followed by an autonomous execution phase. Do not start task-changing work until the user has answered the intake and approved the execution brief. Keep reusable preferences and lessons in the current workspace's `local-docs/`; these are local-only and must never be committed or pushed.
 
 ## 1. Inspect and prepare the intake
 
-Use the task and available context to understand the likely work. Read relevant project instructions and inspect the workspace read-only when that will help make the questions concrete. Do not edit files, run commands with side effects, contact people, or mutate external services during intake.
+Use the task and available context to understand the likely work. Read relevant project instructions and inspect the workspace read-only when that will help make the questions concrete. Before drafting questions, read `local-docs/half-send-preferences.md` and `local-docs/half-send-events.md` if they exist; apply relevant preferences and turn relevant past misses into explicit questions or checks in this task's intake. Do not edit files, run commands with side effects, contact people, or mutate external services during intake.
 
-Think through the task as if you had to finish it without another reply. Identify the decisions that could change the result, hidden dependencies, likely blockers, acceptance criteria, and any consequential actions. Ask the user for the missing information up front:
+Think through the task as if you had to finish it without another reply. Work through the likely paths to completion and identify decisions that could change the result, acceptance criteria, scope boundaries, constraints, dependencies, likely blockers, proof, and consequential actions. Ask up front about every material unknown that could force a pause or materially change the outcome. Cover plausible approaches and edge cases when they matter to this task; do not ask about far-fetched possibilities or details with an obvious, reversible default.
+
+The intake should cover, when relevant:
 
 - What outcome should count as done, and which details matter most?
 - What scope, constraints, compatibility requirements, or preferences should guide the work?
@@ -19,7 +21,7 @@ Think through the task as if you had to finish it without another reply. Identif
 - Which actions are authorized: edits, tests, commits, branch or PR creation, force-push of this task's branch, merge, deployment, publication, data changes, or external communication?
 - What should happen if a required check fails, a dependency is unavailable, or the task cannot be completed safely?
 
-Tailor the questions to the actual task. Do not dump an irrelevant checklist or ask the user to decide routine implementation details. Bundle related questions into a concise intake, with a recommended default where useful. Use the harness's question/input mechanism so the conversation visibly waits for the user's answers; do not rely on a normal message that can be mistaken for task completion.
+Tailor the questions to the actual task. Aim for complete coverage, not the fewest questions: combine related decisions into clear groups, explain why consequential choices matter, and recommend a sensible default for each. Do not ask the user to decide routine implementation details. Use the harness's question/input mechanism so the conversation visibly waits for the user's answers; do not rely on a normal message that can be mistaken for task completion.
 
 If a material decision is already clear from the user's request or project instructions, do not ask it again. Never request credentials in chat; use the approved secret-entry mechanism if a secret is genuinely needed.
 
@@ -29,7 +31,15 @@ After the user answers, summarize the goal, acceptance criteria, scope, assumpti
 
 If the user does not approve, revise the brief or stop. Approval applies only to the described task and actions. It does not bypass system, harness, repository, or platform permissions and approval gates.
 
-## 3. Execute autonomously
+## 3. Events (local learning log)
+
+When the user points out a missed requirement, preference, risk, or likely decision—or you discover that an important task-specific question should have been asked before execution—capture the reusable lesson in `local-docs/half-send-events.md`. Keep entries short and useful for future intake: date, what was missed, the corrected guidance, and what to ask or check next time. Do not include secrets or unnecessary personal/task details. If a preference is clearly reusable across tasks, also add it to `local-docs/half-send-preferences.md`.
+
+On every later invocation, read these local files before asking questions and turn applicable lessons into pre-execution questions or checks. Do not wait until implementation to surface them. Preserve older entries so the skill can continue learning.
+
+These files are private working notes. Never stage, commit, push, publish, or copy their contents into GitHub issues, pull requests, or other external services. Keep repository ignore rules for them. Update and push the skill, README, and other requested shareable files as authorized, while leaving the local notes out of GitHub.
+
+## 4. Execute autonomously
 
 After approval, complete the approved task end to end. Do not ask routine questions or send progress pings that require a reply. Make reasonable, reversible decisions within the approved scope and note material assumptions in the final report. Keep the work focused on the requested outcome and preserve unrelated user changes.
 
@@ -37,10 +47,10 @@ For software changes, use the repository's instructions and workflow. Work from 
 
 Never infer authorization for production changes, deployment, publication, deleting or overwriting user data, external messages, closing someone else's PR, or changing branches outside this task. If such an action becomes necessary and was not explicitly approved, stop before it and leave the work in the safest useful state.
 
-## 4. If blocked while the user is away
+## 5. If blocked while the user is away
 
 Resolve ordinary failures yourself when they are within scope and can be addressed safely. If the remaining choice would materially change the outcome, needs unapproved side effects, depends on unavailable access, or cannot be proven, stop at a safe checkpoint. Do not guess, claim success, or keep retrying in a loop. Leave monitoring/watcher state clean where applicable and report exactly what is complete, what is blocked, and the smallest decision needed from the user.
 
-## 5. Report completion
+## 6. Report completion
 
 Give a concise report with the outcome, important decisions, proof/check results, any PR or artifact links, and anything left incomplete. Distinguish verified results from assumptions. If blocked, begin with the blocker and the specific user input needed to resume.

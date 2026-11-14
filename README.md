@@ -17,3 +17,5 @@ $CODEX_HOME/skills/half-send/SKILL.md
 ```
 
 If `CODEX_HOME` is not set, use `~/.codex/skills/half-send/SKILL.md`. Create the `half-send` folder if needed. Then invoke it by saying **half-send** or `$half-send` and describe the task.
+
+Reusable preferences and past-miss notes belong in `local-docs/`. Those two local files are excluded from Git so they stay on this machine and are not pushed to GitHub.
