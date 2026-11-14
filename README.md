@@ -19,3 +19,13 @@ $CODEX_HOME/skills/half-send/SKILL.md
 If `CODEX_HOME` is not set, use `~/.codex/skills/half-send/SKILL.md`. Create the `half-send` folder if needed. Then invoke it by saying **half-send** or `$half-send` and describe the task.
 
 Reusable preferences and past-miss notes belong in `local-docs/`. Those two local files are excluded from Git so they stay on this machine and are not pushed to GitHub.
+
+## Russelore and RDP Commit
+
+Install both writing skills in a project with the [Skills CLI](https://github.com/vercel-labs/skills):
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill russelore --skill rdp-commit
+```
+
+This fetches the selected skills from the repository. You do not need to download a ZIP.
