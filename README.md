@@ -4,7 +4,7 @@
 
 Made these for how I like working in [T3 Code](https://t3.codes). Ask the important stuff first, write down what we agreed on, then get on with it.
 
-The usual flow is **grilling → to-spec → to-tickets → half-send**. [Eyes of Render](skills/russel/eyes-of-render/SKILL.md) carries the workflow into implementation and checks that the actual UI holds up.
+The default feature flow is **grilling → to-spec → to-tickets → half-send**. [Eyes of Render](skills/russel/eyes-of-render/SKILL.md) carries the workflow into implementation and checks that the actual UI holds up.
 
 ```sh
 npx skills add wrestle-R/Mbappe-Special
@@ -40,6 +40,8 @@ npx skills add wrestle-R/Mbappe-Special --skill unslop
 | [anthropic/frontend-design](skills/anthropic/frontend-design/SKILL.md) | A distinct frontend design direction |
 
 Use the original skill names with `--skill`; the author folders identify where they came from. Copies retain upstream instructions and licenses. The selected pstack helpers are listed in [the skill review](docs/skill-review.md). Exact sources and revisions are in [upstream-sources.json](upstream-sources.json).
+
+For bugs, use **diagnose → reproduce → fix → prove** with diagnosing-bugs. Commit meaningful verified milestones when authorized.
 
 Set up the project tracker before `to-spec` and `to-tickets`. Review the ticket breakdown, then give half-send the implementation scope and go-ahead. Earlier answers carry forward. Publishing issues, commits, releases and deployments follows the task’s authorization.
 

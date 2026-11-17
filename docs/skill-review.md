@@ -2,7 +2,7 @@
 
 The collection keeps upstream skills under their authors, with their original names and instructions. The installer can discover the nested layout because every skill is grouped, including the owner’s skills under `skills/russel/`. Install one by its frontmatter name, such as `--skill diagnosing-bugs`.
 
-## The flow to approve
+## The default flow
 
 For a new feature, use grilling → to-spec → to-tickets → half-send. Configure the tracker once with setup-matt-pocock-skills. Grilling asks decision questions in numbered rounds with recommended MCQ answers. The spec records the agreed outcome. Tickets divide it into complete verifiable slices with blockers. Half-send carries the approved work through implementation without restarting settled questions.
 
@@ -14,7 +14,7 @@ For writing, use russelore for website copy, blogs, README prose and other text 
 
 Commit each meaningful verified milestone using rdp-commit. For an authorized release, use tagged-release and readme-rdp, checking the real downloads and installed version. A release, deployment or push still follows the current task’s authorization.
 
-This proposes the default routing for approval. Installing a helper does not require invoking it on every task. Small clear changes can skip the planning chain.
+This is the owner’s approved default routing. Installing a helper does not require invoking it on every task. Small clear changes can skip the planning chain.
 
 ## Selected pstack skills
 

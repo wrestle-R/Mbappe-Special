@@ -11,6 +11,8 @@ The user invokes this when they expect to go away and cannot answer follow-up qu
 
 The usual sequence is `grilling` → `to-spec` → `to-tickets` → `half-send` implementation. These skills are independently installable. If earlier stages already settled the decisions, read their spec and tickets and reuse those answers. Ask only about remaining material gaps and execution scope. One explicit go-ahead can cover the approved ticket set; do not restart intake or request approval for every ticket.
 
+For a bug task, use diagnose → reproduce → fix → prove rather than forcing it through a new feature specification. For UI work, settle taste or Anthropic frontend-design’s direction before the full build, then check it with eyes-of-render. Commit meaningful verified milestones when authorized. Use russelore for owner-authored published text and unslop for assistant replies. Tagged-release requires release authorization.
+
 Execute tickets whose blockers are complete, verify their acceptance criteria, and record progress before selecting the next ticket. For UI work, use eyes-of-render when installed and the selected frontend design skill. If a companion skill is missing, follow the approved spec directly and report any missing capability that affects completion.
 
 ## 1. Inspect and prepare the intake

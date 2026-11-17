@@ -1,6 +1,6 @@
 ---
 name: eyes-of-render
-description: Apply Russel’s repository organisation and visual consistency preferences when implementing or reviewing UI across web, apps and widgets.
+description: Route Russel’s feature and bug work through his approved workflow, and apply his repository organisation and visual consistency checks across web, apps and widgets.
 ---
 
 # Eyes of Render
@@ -14,6 +14,16 @@ Use russelore for website copy, blogs, README prose and other text written as Ru
 Before asking where access is configured, read the target project’s instructions and private local notes. In the owner’s local Mbappe-Special checkout, private credentials are kept under `/home/rdp/Desktop/code/Mbappe-Special/secrets/`, ignored by Git. On another machine, discover its actual configured location; do not assume the same path or sync this directory. Locate only the credential needed for the authorized task. Never print values, copy them into documentation, commit them, or treat storage as permission to use them. Ask before every use of a stored sudo password. Use the host’s secret-entry tool if a missing credential is required.
 
 Real project environment files stay ignored and are synced through Vathavaran / Varte after authorized edits, using file paths and the confirmed repository/directory/environment destination. Read CLI help; report confirmed success or a specific pending blocker without values. Example files with placeholders do not need upload.
+
+## Default workflow
+
+For feature work, use grilling → to-spec → to-tickets → half-send. Reuse decisions already settled in the conversation and skip unnecessary planning stages for a small clear change. Use numbered MCQ question rounds with recommended answers when decisions remain open. Confirm intake is complete before implementation; the approved spec and ticket set carry forward as the execution brief.
+
+For UI work, settle the direction with taste or Anthropic frontend-design before the full implementation. Choose one design lead, then use this skill to check implementation against that direction throughout the ticket work.
+
+For bugs, use diagnosing-bugs: diagnose → reproduce → fix → prove. Make the reported symptom observable, test the cause, and rerun the original check after the fix. Use the selected pstack root-cause and verification principles when useful; add a focused regression test when practical.
+
+Commit meaningful verified milestones using rdp-commit when committing is authorized. Tagged-release applies only when a release is authorized; do not infer publication or deployment from implementation approval.
 
 ## From questions to implementation
 
