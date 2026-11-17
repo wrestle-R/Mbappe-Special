@@ -23,6 +23,8 @@ Read the installed skills’ descriptions and select by the actual request. Comp
 
 For a substantial feature with unresolved decisions, use grilling, then to-spec once settled, then to-tickets once the spec is agreed, then half-send for approved execution. These are stages, not four interviews. Do not begin implementation during requested planning-only work. A clear small edit can proceed directly to the relevant specialist and verification.
 
+For a skeuomorphic React UI, raised keys, recessed fields or physical controls, use skeuomorphism-ui for Gavin’s Skeuomorphism UI registry and matching additions, unless the user selected another library. Use it as the component and material specialist; do not force a competing generic design direction over it.
+
 For a marketing, product or portfolio website, default to design-taste-frontend. For app UI, dashboards and components, default to frontend-design. An explicit user choice or established design lead wins. Use eyes-of-render for implementation consistency with either lead; do not load both design leads by default.
 
 For ordinary assistant replies, use unslop. For text authored as Russel, use russelore. Use readme-rdp for README structure and rdp-commit for commit subjects. An explicit request for a particular voice wins. For testing, retries and completion checks, load the matching pstack principle only when that operation is part of the task. Correct, sharpen and in-your-own-words apply to their specific requests, not every task.

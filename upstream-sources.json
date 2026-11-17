@@ -185,5 +185,16 @@
       "Automatic invocation enabled in agents/openai.yaml",
       "Removed explicit-only frontmatter where present"
     ]
+  },
+  {
+    "repository": "https://github.com/gavin100305/skeuomorphism-lib",
+    "commit": "af28a5b9f6d2bc04c21bcef12d88c94db459d981",
+    "source": "skills/skeuomorphism-ui",
+    "destination": "skills/russel/skeuomorphism-ui",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Grouped under My Skills at the owner\u2019s request; original source and license retained"
+    ]
   }
 ]

@@ -2,7 +2,7 @@
 
 These are the skills I use. Some are mine, some are from other people, and I keep my copies here so I can customise them for how I work. Every install below points to this repo.
 
-## Russel Daniel Paul
+## My Skills
 
 ### [russelore](skills/russel/russelore/SKILL.md)
 
@@ -50,6 +50,14 @@ Sol handles the release, Luna waits, and Sol handles the result; needs model del
 
 ```sh
 npx skills add wrestle-R/Mbappe-Special --skill tagged-release
+```
+
+### [skeuomorphism-ui](skills/russel/skeuomorphism-ui/SKILL.md)
+
+Builds tactile React interfaces with raised controls, recessed fields and Gavin’s Skeuomorphism UI components.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill skeuomorphism-ui
 ```
 
 ## pstack
