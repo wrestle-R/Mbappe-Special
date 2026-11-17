@@ -2,7 +2,7 @@
 name: eyes-of-render
 description: Coordinate Russel’s normal feature, app and UI requests, from planning through implementation and verification.
   Use for building or changing a feature, website, native app or widget; route to relevant specialist skills and
-  skip unnecessary stages for small clear changes.
+  skip unnecessary stages for small clear changes. Also use when asked to wake or resume the owner’s existing InstaBox.
 ---
 
 # Eyes of Render
@@ -16,6 +16,16 @@ Use russelore for website copy, blogs, README prose and other text written as Ru
 Before asking where access is configured, read the target project’s instructions and private local notes. In the owner’s local Mbappe-Special checkout, private credentials are kept under `/home/rdp/Desktop/code/Mbappe-Special/secrets/`, ignored by Git. On another machine, discover its actual configured location; do not assume the same path or sync this directory. Locate only the credential needed for the authorized task. Never print values, copy them into documentation, commit them, or treat storage as permission to use them. Ask before every use of a stored sudo password. Use the host’s secret-entry tool if a missing credential is required.
 
 Real project environment files stay ignored and are synced through Vathavaran / Varte after authorized edits, using file paths and the confirmed repository/directory/environment destination. Read CLI help; report confirmed success or a specific pending blocker without values. Example files with placeholders do not need upload.
+
+## Wake the owner’s InstaBox when requested
+
+When Russel asks to turn on, wake or resume his existing InstaBox, use the saved local resume script. If he explicitly requests work on that box and it is asleep, resume it as needed for that work. A discussion about InstaBox, or an edit to these instructions, does not itself request a resume.
+
+In the owner’s local checkout, run `python /home/rdp/Desktop/code/Mbappe-Special/secrets/resume-instabox.py`. The adjacent `instabox-resume.curl` holds private browser-session access. Read local notes to locate the configured script on another machine; never assume that the private config was synced. If it is missing, report that instead of inventing credentials or copying secrets between machines.
+
+Use the script as saved: it sends one resume request with a fresh idempotency key and prints only sanitized status. Never print or embed the private config in chat, shell arguments, documentation or Git. Do not reuse a historical idempotency key. Do not pause, stop, delete or reconfigure the box as part of waking it.
+
+Check the reported operation state, then verify the existing SSH endpoint or the service needed for the task is reachable. HTTP 202 with a queued operation only confirms acceptance; do not call the machine ready from that alone. If it is already running, verify reachability without repeatedly sending resume requests. If session/CSRF access is rejected with 401/403, stop and request fresh access through the host’s secret-entry mechanism; do not loop or claim success. Keep the script, credentials and local notes ignored and local-only.
 
 ## Select only the skills this task needs
 
