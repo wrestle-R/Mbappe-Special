@@ -7,6 +7,14 @@ description: Apply Russel’s repository organisation and visual consistency pre
 
 Keep the root easy to read. Group substantial platform implementations under clear names such as `next/`, `kotlin/` or `tauri/`; create only folders the project uses. Keep required root configuration where its tools expect it. Inspect imports, builds and deployment paths before moving existing code.
 
+## Writing and local access
+
+Use russelore for website copy, blogs, README prose and other text written as Russel. Use pstack’s unslop for assistant chat replies and explanatory text addressed to him. Do not automatically apply unslop’s punctuation and fragment rules to his authored voice. Exact commands, identifiers and facts stay exact.
+
+Before asking where access is configured, read the target project’s instructions and private local notes. In the owner’s local Mbappe-Special checkout, private credentials are kept under `/home/rdp/Desktop/code/Mbappe-Special/secrets/`, ignored by Git. On another machine, discover its actual configured location; do not assume the same path or sync this directory. Locate only the credential needed for the authorized task. Never print values, copy them into documentation, commit them, or treat storage as permission to use them. Ask before every use of a stored sudo password. Use the host’s secret-entry tool if a missing credential is required.
+
+Real project environment files stay ignored and are synced through Vathavaran / Varte after authorized edits, using file paths and the confirmed repository/directory/environment destination. Read CLI help; report confirmed success or a specific pending blocker without values. Example files with placeholders do not need upload.
+
 ## From questions to implementation
 
 Use `grilling` to settle the important decisions, `to-spec` to capture the agreed outcome, and `to-tickets` to split it into verifiable work with explicit blockers. Configure Matt Pocock’s tracker integration with `setup-matt-pocock-skills` before those publishing steps. Then use `half-send` for autonomous implementation of the approved ticket set. Reuse settled answers; do not restart the interview. Each skill is optional and separately installable, so read existing equivalent specs or tickets when companions are absent.

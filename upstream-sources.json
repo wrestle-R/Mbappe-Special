@@ -40,5 +40,65 @@
     "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
     "source": "skills/frontend-design",
     "destination": "skills/anthropic/frontend-design"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/sharpen",
+    "destination": "skills/pstack/sharpen"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/in-your-own-words",
+    "destination": "skills/pstack/in-your-own-words"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/why",
+    "destination": "skills/pstack/why"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/correct",
+    "destination": "skills/pstack/correct"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/tdd",
+    "destination": "skills/pstack/tdd"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/principle-fix-root-causes",
+    "destination": "skills/pstack/principle-fix-root-causes"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/principle-prove-it-works",
+    "destination": "skills/pstack/principle-prove-it-works"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/principle-test-behavior-not-implementation",
+    "destination": "skills/pstack/principle-test-behavior-not-implementation"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/principle-make-operations-idempotent",
+    "destination": "skills/pstack/principle-make-operations-idempotent"
+  },
+  {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+    "source": "skills/engineering/diagnosing-bugs",
+    "destination": "skills/mattpocock/diagnosing-bugs"
   }
 ]

@@ -34,14 +34,15 @@ npx skills add wrestle-R/Mbappe-Special --skill unslop
 | [mattpocock/to-spec](skills/mattpocock/to-spec/SKILL.md) | Turn the conversation into a spec |
 | [mattpocock/to-tickets](skills/mattpocock/to-tickets/SKILL.md) | Split the plan into complete slices with blockers |
 | [mattpocock/setup-matt-pocock-skills](skills/mattpocock/setup-matt-pocock-skills/SKILL.md) | Configure the tracker used by spec and tickets |
+| [mattpocock/diagnosing-bugs](skills/mattpocock/diagnosing-bugs/SKILL.md) | Reproduce a bug, test the cause and verify the fix |
 | [pstack/unslop](skills/pstack/unslop/SKILL.md) | Remove AI patterns from writing |
 | [leonxlnx/design-taste-frontend](skills/leonxlnx/design-taste-frontend/SKILL.md) | Website art direction and design checks |
 | [anthropic/frontend-design](skills/anthropic/frontend-design/SKILL.md) | A distinct frontend design direction |
 
-Use the original skill names with `--skill`; the author labels identify where they came from. Copies retain upstream instructions and licenses. Exact sources and revisions are in [upstream-sources.json](upstream-sources.json).
+Use the original skill names with `--skill`; the author folders identify where they came from. Copies retain upstream instructions and licenses. The selected pstack helpers are listed in [the skill review](docs/skill-review.md). Exact sources and revisions are in [upstream-sources.json](upstream-sources.json).
 
 Set up the project tracker before `to-spec` and `to-tickets`. Review the ticket breakdown, then give half-send the implementation scope and go-ahead. Earlier answers carry forward. Publishing issues, commits, releases and deployments follows the task’s authorization.
 
-For UI work, choose taste or Anthropic frontend-design as the design lead and use eyes-of-render to check the result. For writing, start with russelore and use unslop as an editing pass when wanted, preserving my supplied wording and voice choices. [The skill review](docs/skill-review.md) explains what fits where.
+For UI work, choose taste or Anthropic frontend-design as the design lead and use eyes-of-render to check the result. Russelore is for website copy, blogs and text written as me. Unslop is for assistant replies and explanations to me. [The skill review](docs/skill-review.md) explains what fits where.
 
 Taste includes Node 22+ and Chromium tooling; its Claude hooks do not imply automatic T3 support. Tagged-release needs model delegation and completion handoffs. Private working notes stay in ignored `local-docs/`.
