@@ -1,8 +1,6 @@
 ---
 name: diagnosing-bugs
-description: Diagnose and fix reported bugs, crashes, broken behaviour, failing checks or performance regressions.
-  Use for normal requests such as fix this, debug this, this is broken or this is slow. Reproduce the actual symptom
-  and verify the fix.
+description: Use when asked to fix, debug or diagnose broken behaviour, crashes, failing checks or performance regressions.
 ---
 
 # Diagnosing Bugs

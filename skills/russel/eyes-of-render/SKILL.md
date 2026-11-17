@@ -1,8 +1,7 @@
 ---
 name: eyes-of-render
-description: Coordinate Russel’s normal feature, app and UI requests, from planning through implementation and verification.
-  Use for building or changing a feature, website, native app or widget; route to relevant specialist skills and
-  skip unnecessary stages for small clear changes. Also use when asked to wake or resume the owner’s existing InstaBox.
+description: Use for feature, app, website or widget work, UI consistency checks, or requests to wake the owner’s
+  InstaBox.
 ---
 
 # Eyes of Render

@@ -1,8 +1,7 @@
 ---
 name: setup-matt-pocock-skills
-description: Configure project tracker and domain documentation when first using the spec or ticket workflow and
-  that configuration is missing, or when asked to change that setup. Reuse existing configuration; do not run setup
-  on every task.
+description: Use when project tracker configuration is missing for the spec/ticket workflow, or when asked to change
+  it.
 ---
 
 # Setup Matt Pocock's Skills

@@ -1,9 +1,7 @@
 ---
 name: skeuomorphism-ui
-description: Install and compose Gavin’s Skeuomorphism UI React components, or build matching tactile additions.
-  Use when Russel asks for skeuomorphic UI, raised keys, recessed fields, physical controls, or this skeuomorphism-lib
-  registry. Read the host project before installing; preserve an explicitly chosen different library and do not
-  use for generic 3D artwork.
+description: Use for Gavin’s Skeuomorphism UI library, skeuomorphic React interfaces, raised keys, recessed fields
+  or matching tactile components.
 ---
 
 # Skeuomorphism UI

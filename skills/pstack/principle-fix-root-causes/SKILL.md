@@ -1,8 +1,6 @@
 ---
 name: principle-fix-root-causes
-description: 'Apply while debugging or fixing broken behaviour: trace the symptom to the first incorrect state or
-  decision and fix it there. Use alongside diagnosing-bugs; avoid symptom-only guards and retries that hide the
-  fault.'
+description: Use while debugging or fixing broken behaviour to trace the underlying fault.
 ---
 
 # Fix Root Causes

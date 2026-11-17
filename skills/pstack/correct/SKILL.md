@@ -1,8 +1,6 @@
 ---
 name: correct
-description: Prevent a demonstrated recurring class of agent or code mistakes. Use when the user says this keeps
-  happening, stop repeating this mistake or asks to make a rule enforceable. Confirm repetition from evidence; do
-  not treat every isolated correction as a repository-wide refactor.
+description: Use when asked to prevent recurring agent mistakes or enforce a repeatedly missed requirement.
 ---
 
 # Correct

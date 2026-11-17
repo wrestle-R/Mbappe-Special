@@ -1,7 +1,6 @@
 ---
 name: why
-description: Explain why a project decision was made, why a design exists or what led to a regression, using commits
-  and discussions as evidence. Use for project rationale and history questions, not generic runtime walkthroughs.
+description: Use when asked why a project decision was made, why a design exists or what led to a regression.
 ---
 
 # Why

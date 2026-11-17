@@ -1,8 +1,6 @@
 ---
 name: design-taste-frontend
-description: Lead visual design for a new or redesigned marketing, company, product or portfolio website when no
-  design lead is selected, or when asked for taste or to fix a generic AI-looking page. Use its website art direction
-  and tooling; reuse the approved theme and do not compete with a selected frontend-design lead.
+description: Use for marketing, product, company or portfolio website design, or when taste is requested.
 hooks:
   Stop:
   - hooks:

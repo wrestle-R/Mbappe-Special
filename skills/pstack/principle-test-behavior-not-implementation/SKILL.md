@@ -1,7 +1,6 @@
 ---
 name: principle-test-behavior-not-implementation
-description: Apply when writing, editing or reviewing tests. Assert observable behaviour and useful invariants so
-  tests catch broken behaviour while surviving internal refactors. Does not require adding tests to every change.
+description: Use when writing, changing or reviewing tests.
 ---
 
 # Test Behavior, Not Implementation

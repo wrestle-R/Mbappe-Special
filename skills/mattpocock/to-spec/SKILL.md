@@ -1,8 +1,6 @@
 ---
 name: to-spec
-description: Turn settled feature decisions or an approved planning conversation into a specification. Use when
-  asked to write a spec or PRD, or at the specification stage of the approved feature workflow. Do not restart the
-  interview; publishing follows the configured tracker and task authorization.
+description: Use when asked for a spec or PRD, or when settled feature decisions need a specification.
 ---
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.

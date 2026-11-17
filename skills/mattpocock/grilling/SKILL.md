@@ -1,8 +1,7 @@
 ---
 name: grilling
-description: Clarify a consequential feature idea, plan or product decision before implementation. Use when asked
-  to plan, ideate, stress-test an idea or ask the important questions, or when material scope choices remain open.
-  Skip settled decisions and routine reversible details.
+description: Use when planning a feature, clarifying consequential decisions, stress-testing an idea or asking pre-implementation
+  questions.
 ---
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.

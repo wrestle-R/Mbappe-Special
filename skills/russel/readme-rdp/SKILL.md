@@ -1,7 +1,6 @@
 ---
 name: readme-rdp
-description: Create, rewrite, simplify or improve a project README for Russel. Use for README requests; compose
-  owner-authored prose with russelore and follow his requested contents and layout.
+description: Use when creating, rewriting, simplifying or improving a project README.
 ---
 
 # README RDP

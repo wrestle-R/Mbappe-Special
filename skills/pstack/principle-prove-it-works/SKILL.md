@@ -1,7 +1,6 @@
 ---
 name: principle-prove-it-works
-description: Apply when finishing implementation, a bug fix, a build, an installation or a release, before reporting
-  completion. Verify the actual changed behaviour or artifact and state anything that remains unverified.
+description: Use before reporting completion of implementation, fixes, builds, installations or releases.
 ---
 
 # Prove It Works

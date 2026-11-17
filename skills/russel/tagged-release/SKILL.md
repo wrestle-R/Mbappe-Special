@@ -1,8 +1,6 @@
 ---
 name: tagged-release
-description: Prepare and carry out an authorized tagged release, with Sol owning publication and repairs and Luna
-  handling supported passive waits. Use when asked to release, publish a version or create a release tag; ordinary
-  edits and commits do not trigger publication.
+description: Use when asked to create a tagged release or publish a version.
 ---
 
 # Tagged Release

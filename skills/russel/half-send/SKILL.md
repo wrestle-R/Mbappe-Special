@@ -1,8 +1,6 @@
 ---
 name: half-send
-description: Complete approved work autonomously when Russel says half-send, asks you to finish while he is away,
-  or approves implementation after planning. Gather remaining material decisions once, reuse settled answers, then
-  execute the approved scope.
+description: Use when Russel says half-send, asks for work while away, or approves implementation after planning.
 ---
 
 # Half Send

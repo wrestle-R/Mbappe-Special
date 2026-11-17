@@ -1,8 +1,6 @@
 ---
 name: tdd
-description: Add a focused failing-before test for a bug fix when requested, or when there is an obvious cheap local
-  regression-test target. Use for TDD and regression-test requests; do not force broad test infrastructure for a
-  small fix.
+description: Use for TDD or regression-test requests, or bug fixes with an obvious cheap local test target.
 ---
 
 # TDD Bug Fix

@@ -1,8 +1,6 @@
 ---
 name: russelore
-description: 'Write or edit text as Russel: blogs, website copy, portfolio copy, captions and personal README prose.
-  Use when drafting in his voice or editing his words; ordinary assistant explanations use unslop, and commit subjects
-  use rdp-commit.'
+description: Use when writing blogs, website copy, captions or other text as Russel, or editing his drafts.
 metadata:
   version: 0.3.0
 ---

@@ -1,8 +1,6 @@
 ---
 name: sharpen
-description: Improve or rewrite a task prompt when asked to make it clearer, more precise or more rigorous without
-  expanding scope. Use for sharpen this prompt or improve this brief. Do not replace an ordinary implementation
-  request with a prompt-writing exercise.
+description: Use when asked to improve, clarify or sharpen a task prompt or brief.
 ---
 
 I want a deeper version of this task, not a bigger one. Before rewriting it, do four things:

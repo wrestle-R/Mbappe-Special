@@ -1,8 +1,6 @@
 ---
 name: principle-make-operations-idempotent
-description: Apply when implementing retries, offline queues, sync, installation commands or lifecycle operations
-  that can run more than once or resume after interruption. Make repeated execution converge safely without duplicate
-  effects.
+description: Use when implementing retries, offline queues, sync, installers or operations that may run repeatedly.
 ---
 
 # Make Operations Idempotent

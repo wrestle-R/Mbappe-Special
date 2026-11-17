@@ -1,8 +1,6 @@
 ---
 name: to-tickets
-description: Break an agreed specification or plan into complete implementation tickets with blockers and acceptance
-  criteria. Use when asked for tickets, issues or a work breakdown, or after the feature spec is settled. Review
-  the breakdown before publishing it.
+description: Use when breaking an agreed spec or plan into implementation tickets, issues or a work breakdown.
 ---
 
 # To Tickets

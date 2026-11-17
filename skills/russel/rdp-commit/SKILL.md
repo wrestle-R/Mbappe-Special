@@ -1,7 +1,6 @@
 ---
 name: rdp-commit
-description: Name or revise a Git commit when committing authorized changes for Russel. Inspect the diff and write
-  a short casual subject. This skill names commits; it does not authorize creating or pushing them.
+description: Use when writing or revising Git commit messages for Russel.
 metadata:
   version: 1.0.0
 ---

@@ -1,8 +1,6 @@
 ---
 name: frontend-design
-description: Lead visual design for application UI, dashboards, interactive tools and components, or when Anthropic
-  frontend-design is requested. Also use for websites when selected as the design lead. Do not compete with a selected
-  design-taste-frontend lead; preserve the approved project theme.
+description: Use for app UI, dashboards and components, or when Anthropic frontend-design is selected for a website.
 license: Complete terms in LICENSE.txt
 ---
 
