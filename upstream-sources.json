@@ -1,0 +1,44 @@
+[
+  {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+    "source": "skills/productivity/grilling",
+    "destination": "skills/mattpocock/grilling"
+  },
+  {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+    "source": "skills/engineering/to-spec",
+    "destination": "skills/mattpocock/to-spec"
+  },
+  {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+    "source": "skills/engineering/to-tickets",
+    "destination": "skills/mattpocock/to-tickets"
+  },
+  {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+    "source": "skills/engineering/setup-matt-pocock-skills",
+    "destination": "skills/mattpocock/setup-matt-pocock-skills"
+  },
+  {
+    "repository": "https://github.com/backnotprop/pstack",
+    "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
+    "source": "skills/unslop",
+    "destination": "skills/pstack/unslop"
+  },
+  {
+    "repository": "https://github.com/Leonxlnx/taste-skill",
+    "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
+    "source": "skills/taste-skill",
+    "destination": "skills/leonxlnx/design-taste-frontend"
+  },
+  {
+    "repository": "https://github.com/anthropics/skills",
+    "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+    "source": "skills/frontend-design",
+    "destination": "skills/anthropic/frontend-design"
+  }
+]
