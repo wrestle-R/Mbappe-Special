@@ -1,50 +1,80 @@
-<img src="assets/icon.png" width="120" alt="">
+<div align="center">
+  <img src="assets/icon.png" width="180" alt="">
+  <h1>The Mbappe Special</h1>
+  <p>My skills, the ones I keep borrowing, and how I use them together.</p>
+  <p>
+    <a href="#get-the-skills">Install</a> &nbsp;·&nbsp;
+    <a href="#how-i-use-them">The workflow</a> &nbsp;·&nbsp;
+    <a href="#the-collection">The collection</a>
+  </p>
+</div>
 
-# The Mbappe Special
+---
 
-Made these for how I like working in [T3 Code](https://t3.codes). Ask the important stuff first, write down what we agreed on, then get on with it.
+I have my own skills, I use a bunch made by other people, and I wanted them in one place with a proper flow. So this is that. Made around how I work in [T3 Code](https://t3.codes), with the important questions asked before I disappear and the agent starts making decisions for me.
 
-The default feature flow is **grilling → to-spec → to-tickets → half-send**. [Eyes of Render](skills/russel/eyes-of-render/SKILL.md) carries the workflow into implementation and checks that the actual UI holds up.
+## Get the skills
 
 ```sh
 npx skills add wrestle-R/Mbappe-Special
 ```
 
-Pick whichever skills you want, or install one directly:
+Pick what you want. Each skill works as a separate install too.
 
 ```sh
-npx skills add wrestle-R/Mbappe-Special --skill eyes-of-render
-npx skills add wrestle-R/Mbappe-Special --skill grilling
 npx skills add wrestle-R/Mbappe-Special --skill half-send
-npx skills add wrestle-R/Mbappe-Special --skill unslop
 ```
 
-| Mine | What I use it for |
-| --- | --- |
-| [half-send](skills/russel/half-send/SKILL.md) | Finish the approved work while I’m away |
-| [eyes-of-render](skills/russel/eyes-of-render/SKILL.md) | Workflow, shared theme, compact layouts and rendered checks |
-| [russelore](skills/russel/russelore/SKILL.md) | My writing voice |
-| [rdp-commit](skills/russel/rdp-commit/SKILL.md) | Short casual commit names |
-| [readme-rdp](skills/russel/readme-rdp/SKILL.md) | A little backstory and the useful instructions |
-| [tagged-release](skills/russel/tagged-release/SKILL.md) | Sol handles releases, Luna waits, Sol handles the result |
+Use the skill’s original name after `--skill`, like `grilling`, `unslop` or `frontend-design`.
 
-| Upstream copies | What they do |
-| --- | --- |
-| [mattpocock/grilling](skills/mattpocock/grilling/SKILL.md) | Work through decisions in question rounds |
-| [mattpocock/to-spec](skills/mattpocock/to-spec/SKILL.md) | Turn the conversation into a spec |
-| [mattpocock/to-tickets](skills/mattpocock/to-tickets/SKILL.md) | Split the plan into complete slices with blockers |
-| [mattpocock/setup-matt-pocock-skills](skills/mattpocock/setup-matt-pocock-skills/SKILL.md) | Configure the tracker used by spec and tickets |
-| [mattpocock/diagnosing-bugs](skills/mattpocock/diagnosing-bugs/SKILL.md) | Reproduce a bug, test the cause and verify the fix |
-| [pstack/unslop](skills/pstack/unslop/SKILL.md) | Remove AI patterns from writing |
-| [leonxlnx/design-taste-frontend](skills/leonxlnx/design-taste-frontend/SKILL.md) | Website art direction and design checks |
-| [anthropic/frontend-design](skills/anthropic/frontend-design/SKILL.md) | A distinct frontend design direction |
+## How I use them
 
-Use the original skill names with `--skill`; the author folders identify where they came from. Copies retain upstream instructions and licenses. The selected pstack helpers are listed in [the skill review](docs/skill-review.md). Exact sources and revisions are in [upstream-sources.json](upstream-sources.json).
+**grilling → to-spec → to-tickets → half-send**
 
-For bugs, use **diagnose → reproduce → fix → prove** with diagnosing-bugs. Commit meaningful verified milestones when authorized.
+| Step | What happens |
+| :--- | :--- |
+| [grilling](skills/mattpocock/grilling/SKILL.md) | Ask the important questions, give me recommended answers, settle the decisions. |
+| [to-spec](skills/mattpocock/to-spec/SKILL.md) | Write down what we agreed to build. |
+| [to-tickets](skills/mattpocock/to-tickets/SKILL.md) | Split it into complete pieces with clear blockers. |
+| [half-send](skills/russel/half-send/SKILL.md) | I approve the work, then the agent gets on with it while I’m away. |
 
-Set up the project tracker before `to-spec` and `to-tickets`. Review the ticket breakdown, then give half-send the implementation scope and go-ahead. Earlier answers carry forward. Publishing issues, commits, releases and deployments follows the task’s authorization.
+Set up the project’s tracker with [setup-matt-pocock-skills](skills/mattpocock/setup-matt-pocock-skills/SKILL.md) first. Answers carry forward through the steps. A small obvious fix doesn’t need the whole ceremony.
 
-For UI work, choose taste or Anthropic frontend-design as the design lead and use eyes-of-render to check the result. Russelore is for website copy, blogs and text written as me. Unslop is for assistant replies and explanations to me. [The skill review](docs/skill-review.md) explains what fits where.
+For UI, I pick [taste](skills/leonxlnx/design-taste-frontend/SKILL.md) or [Anthropic frontend-design](skills/anthropic/frontend-design/SKILL.md) for the direction. [Eyes of Render](skills/russel/eyes-of-render/SKILL.md) checks the implementation: the theme, the controls, the resizing, the actual thing on screen.
 
-Taste includes Node 22+ and Chromium tooling; its Claude hooks do not imply automatic T3 support. Tagged-release needs model delegation and completion handoffs. Private working notes stay in ignored `local-docs/`.
+For bugs, it’s **diagnose → reproduce → fix → prove**, using [diagnosing-bugs](skills/mattpocock/diagnosing-bugs/SKILL.md). Commit verified milestones along the way. Releases and deployments still need their own authorization.
+
+## The collection
+
+| Mine | What it’s for |
+| :--- | :--- |
+| [half-send](skills/russel/half-send/SKILL.md) | Approved work while I’m away. |
+| [eyes-of-render](skills/russel/eyes-of-render/SKILL.md) | The workflow and UI checks I keep asking for. |
+| [russelore](skills/russel/russelore/SKILL.md) | Website copy, blogs and other text written as me. |
+| [rdp-commit](skills/russel/rdp-commit/SKILL.md) | Short casual commit names. |
+| [readme-rdp](skills/russel/readme-rdp/SKILL.md) | A little backstory, a useful visual, the instructions you need. |
+| [tagged-release](skills/russel/tagged-release/SKILL.md) | Sol handles the release, Luna waits, Sol handles the result. |
+
+<details>
+<summary><strong>The ones I borrow</strong></summary>
+
+<br>
+
+| From | What I keep here |
+| :--- | :--- |
+| [Matt Pocock](skills/mattpocock/) | Grilling, specs, tickets, tracker setup and bug diagnosis. |
+| [pstack](skills/pstack/) | Unslop, sharper prompts, root-cause fixes, practical tests and proof that things work. |
+| [Leonxlnx](skills/leonxlnx/) | Taste for frontend art direction and design checks. |
+| [Anthropic](skills/anthropic/) | Frontend design. |
+
+Unslop is for the agent’s replies and explanations to me. Russelore is for text written as me. Both have a job here.
+
+Upstream copies keep their original names, instructions and licenses. [The source manifest](upstream-sources.json) records the exact revisions.
+
+</details>
+
+<br>
+
+[Which skills fit where](docs/skill-review.md) · [The full pstack review](docs/pstack-review.md)
+
+Taste’s tooling needs Node 22+ and Chromium. Tagged-release needs a host with model delegation and completion handoffs. Private working notes stay in ignored `local-docs/`.
