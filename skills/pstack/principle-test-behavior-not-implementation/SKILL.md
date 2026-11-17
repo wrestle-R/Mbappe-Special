@@ -1,7 +1,7 @@
 ---
 name: principle-test-behavior-not-implementation
-description: "Apply when you write, change, or keep a test. Assert what the code's users can observe, so that the test fails when that behavior breaks and keeps passing when only the internals change."
-disable-model-invocation: true
+description: Apply when writing, editing or reviewing tests. Assert observable behaviour and useful invariants so
+  tests catch broken behaviour while surviving internal refactors. Does not require adding tests to every change.
 ---
 
 # Test Behavior, Not Implementation

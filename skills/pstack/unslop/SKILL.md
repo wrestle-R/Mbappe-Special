@@ -1,7 +1,8 @@
 ---
 name: unslop
-description: Cut AI tells from any writing.
-disable-model-invocation: true
+description: Write or edit assistant chat replies, explanations, status updates and technical prose addressed to
+  Russel in plain language without AI writing patterns. Apply to ordinary replies; use russelore instead for blogs,
+  website copy and other text written as Russel.
 ---
 
 # Unslop

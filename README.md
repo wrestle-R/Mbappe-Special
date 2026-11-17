@@ -196,4 +196,4 @@ Gives a frontend its own visual direction instead of another generic layout.
 npx skills add wrestle-R/Mbappe-Special --skill frontend-design
 ```
 
-Original sources and revisions are recorded in [the source manifest](upstream-sources.json). Upstream licenses stay with their skills.
+Original sources and revisions are recorded in [the source manifest](upstream-sources.json). These copies keep their original names and licenses, with task descriptions and automatic invocation settings customized for my workflow.

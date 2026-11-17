@@ -1,6 +1,6 @@
 # Skills that fit this workflow
 
-The collection keeps upstream skills under their authors, with their original names and instructions. The installer can discover the nested layout because every skill is grouped, including the owner’s skills under `skills/russel/`. Install one by its frontmatter name, such as `--skill diagnosing-bugs`.
+The collection keeps upstream skills under their authors, with their original names and licenses, and customized automatic-selection metadata. The installer can discover the nested layout because every skill is grouped, including the owner’s skills under `skills/russel/`. Install one by its frontmatter name, such as `--skill diagnosing-bugs`.
 
 ## The default flow
 

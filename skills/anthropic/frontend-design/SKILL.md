@@ -1,6 +1,8 @@
 ---
 name: frontend-design
-description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+description: Lead visual design for application UI, dashboards, interactive tools and components, or when Anthropic
+  frontend-design is requested. Also use for websites when selected as the design lead. Do not compete with a selected
+  design-taste-frontend lead; preserve the approved project theme.
 license: Complete terms in LICENSE.txt
 ---
 

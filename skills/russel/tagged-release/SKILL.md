@@ -1,6 +1,8 @@
 ---
 name: tagged-release
-description: Release with Sol and delegate passive monitoring to Luna, returning terminal results to Sol for diagnosis and fixes. Use when the user requests a tagged release or invokes tagged-release.
+description: Prepare and carry out an authorized tagged release, with Sol owning publication and repairs and Luna
+  handling supported passive waits. Use when asked to release, publish a version or create a release tag; ordinary
+  edits and commits do not trigger publication.
 ---
 
 # Tagged Release

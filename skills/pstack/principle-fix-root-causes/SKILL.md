@@ -1,7 +1,8 @@
 ---
 name: principle-fix-root-causes
-description: "Apply when debugging. Trace each symptom back to the first place the system went wrong and fix it there. A guard is a fix only when the state it handles is legitimate."
-disable-model-invocation: true
+description: 'Apply while debugging or fixing broken behaviour: trace the symptom to the first incorrect state or
+  decision and fix it there. Use alongside diagnosing-bugs; avoid symptom-only guards and retries that hide the
+  fault.'
 ---
 
 # Fix Root Causes

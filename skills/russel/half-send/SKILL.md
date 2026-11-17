@@ -1,6 +1,8 @@
 ---
 name: half-send
-description: Trigger when the user says “half-send.” Check local preferences and past lessons, ask task-critical questions and get approval before starting, then complete the approved task autonomously.
+description: Complete approved work autonomously when Russel says half-send, asks you to finish while he is away,
+  or approves implementation after planning. Gather remaining material decisions once, reuse settled answers, then
+  execute the approved scope.
 ---
 
 # Half Send

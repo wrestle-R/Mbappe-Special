@@ -1,7 +1,8 @@
 ---
 name: to-tickets
-description: Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).
-disable-model-invocation: true
+description: Break an agreed specification or plan into complete implementation tickets with blockers and acceptance
+  criteria. Use when asked for tickets, issues or a work breakdown, or after the feature spec is settled. Review
+  the breakdown before publishing it.
 ---
 
 # To Tickets

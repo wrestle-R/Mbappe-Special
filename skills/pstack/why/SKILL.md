@@ -1,7 +1,7 @@
 ---
 name: why
-description: "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Returns a cited read on decisions and tradeoffs. Use how for runtime behavior."
-disable-model-invocation: true
+description: Explain why a project decision was made, why a design exists or what led to a regression, using commits
+  and discussions as evidence. Use for project rationale and history questions, not generic runtime walkthroughs.
 ---
 
 # Why

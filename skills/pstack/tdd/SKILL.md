@@ -1,7 +1,8 @@
 ---
 name: tdd
-description: "Use only when the user explicitly asks for TDD, a failing test, or a regression test, OR when the bug has an obvious cheap local test target. Skip when the test path is unclear, expensive, integration-heavy, or not requested."
-disable-model-invocation: true
+description: Add a focused failing-before test for a bug fix when requested, or when there is an obvious cheap local
+  regression-test target. Use for TDD and regression-test requests; do not force broad test infrastructure for a
+  small fix.
 ---
 
 # TDD Bug Fix

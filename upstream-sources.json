@@ -3,102 +3,187 @@
     "repository": "https://github.com/mattpocock/skills",
     "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
     "source": "skills/productivity/grilling",
-    "destination": "skills/mattpocock/grilling"
+    "destination": "skills/mattpocock/grilling",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/mattpocock/skills",
     "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
     "source": "skills/engineering/to-spec",
-    "destination": "skills/mattpocock/to-spec"
+    "destination": "skills/mattpocock/to-spec",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/mattpocock/skills",
     "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
     "source": "skills/engineering/to-tickets",
-    "destination": "skills/mattpocock/to-tickets"
+    "destination": "skills/mattpocock/to-tickets",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/mattpocock/skills",
     "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
     "source": "skills/engineering/setup-matt-pocock-skills",
-    "destination": "skills/mattpocock/setup-matt-pocock-skills"
+    "destination": "skills/mattpocock/setup-matt-pocock-skills",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/unslop",
-    "destination": "skills/pstack/unslop"
+    "destination": "skills/pstack/unslop",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/Leonxlnx/taste-skill",
     "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
     "source": "skills/taste-skill",
-    "destination": "skills/leonxlnx/design-taste-frontend"
+    "destination": "skills/leonxlnx/design-taste-frontend",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/anthropics/skills",
     "commit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
     "source": "skills/frontend-design",
-    "destination": "skills/anthropic/frontend-design"
+    "destination": "skills/anthropic/frontend-design",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/sharpen",
-    "destination": "skills/pstack/sharpen"
+    "destination": "skills/pstack/sharpen",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/in-your-own-words",
-    "destination": "skills/pstack/in-your-own-words"
+    "destination": "skills/pstack/in-your-own-words",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/why",
-    "destination": "skills/pstack/why"
+    "destination": "skills/pstack/why",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/correct",
-    "destination": "skills/pstack/correct"
+    "destination": "skills/pstack/correct",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/tdd",
-    "destination": "skills/pstack/tdd"
+    "destination": "skills/pstack/tdd",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/principle-fix-root-causes",
-    "destination": "skills/pstack/principle-fix-root-causes"
+    "destination": "skills/pstack/principle-fix-root-causes",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/principle-prove-it-works",
-    "destination": "skills/pstack/principle-prove-it-works"
+    "destination": "skills/pstack/principle-prove-it-works",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/principle-test-behavior-not-implementation",
-    "destination": "skills/pstack/principle-test-behavior-not-implementation"
+    "destination": "skills/pstack/principle-test-behavior-not-implementation",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/backnotprop/pstack",
     "commit": "059190ea76d062acc19b9d733e9096d7be35081c",
     "source": "skills/principle-make-operations-idempotent",
-    "destination": "skills/pstack/principle-make-operations-idempotent"
+    "destination": "skills/pstack/principle-make-operations-idempotent",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   },
   {
     "repository": "https://github.com/mattpocock/skills",
     "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
     "source": "skills/engineering/diagnosing-bugs",
-    "destination": "skills/mattpocock/diagnosing-bugs"
+    "destination": "skills/mattpocock/diagnosing-bugs",
+    "local_customizations": [
+      "Task-specific description for automatic selection",
+      "Automatic invocation enabled in agents/openai.yaml",
+      "Removed explicit-only frontmatter where present"
+    ]
   }
 ]

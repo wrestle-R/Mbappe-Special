@@ -1,6 +1,6 @@
 # Pstack catalog review
 
-Catalog screened from the pinned backnotprop/pstack revision in upstream-sources.json. Included means copied unchanged into this collection. Conditional means useful for a specific task but deferred. The remaining entries overlap existing guidance or add more process than the routine workflow needs.
+Catalog screened from the pinned backnotprop/pstack revision in upstream-sources.json. Included means included with customized automatic-selection metadata. Conditional means useful for a specific task but deferred. The remaining entries overlap existing guidance or add more process than the routine workflow needs.
 
 | Skill | Decision | Purpose |
 | --- | --- | --- |

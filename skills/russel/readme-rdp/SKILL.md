@@ -1,6 +1,7 @@
 ---
 name: readme-rdp
-description: Write a concise project README in Russel’s voice with a short backstory, useful visual and simple working installation instructions.
+description: Create, rewrite, simplify or improve a project README for Russel. Use for README requests; compose
+  owner-authored prose with russelore and follow his requested contents and layout.
 ---
 
 # README RDP

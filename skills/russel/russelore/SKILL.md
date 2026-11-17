@@ -1,13 +1,15 @@
 ---
 name: russelore
-description: Write for Russel, edit his drafts, or answer in his conversational register. Use his published blogs as the main voice reference, and do not invent personal facts or opinions.
+description: 'Write or edit text as Russel: blogs, website copy, portfolio copy, captions and personal README prose.
+  Use when drafting in his voice or editing his words; ordinary assistant explanations use unslop, and commit subjects
+  use rdp-commit.'
 metadata:
-  version: "0.3.0"
+  version: 0.3.0
 ---
 
 # Russelore
 
-Use Russel's published blog writing as the main voice reference. This skill covers blogs, personal or portfolio copy, captions, editing his drafts, and assistant replies. Commit subjects belong to `rdp-commit`.
+Use Russel's published blog writing as the main voice reference. This skill covers blogs, personal or portfolio copy, captions and editing his drafts. Ordinary assistant replies use `unslop`; use this voice for replies only when explicitly requested. Commit subjects belong to `rdp-commit`.
 
 ## Before writing
 

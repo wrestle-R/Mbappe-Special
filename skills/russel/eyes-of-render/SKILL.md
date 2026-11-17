@@ -1,6 +1,8 @@
 ---
 name: eyes-of-render
-description: Route Russel’s feature and bug work through his approved workflow, and apply his repository organisation and visual consistency checks across web, apps and widgets.
+description: Coordinate Russel’s normal feature, app and UI requests, from planning through implementation and verification.
+  Use for building or changing a feature, website, native app or widget; route to relevant specialist skills and
+  skip unnecessary stages for small clear changes.
 ---
 
 # Eyes of Render
@@ -14,6 +16,18 @@ Use russelore for website copy, blogs, README prose and other text written as Ru
 Before asking where access is configured, read the target project’s instructions and private local notes. In the owner’s local Mbappe-Special checkout, private credentials are kept under `/home/rdp/Desktop/code/Mbappe-Special/secrets/`, ignored by Git. On another machine, discover its actual configured location; do not assume the same path or sync this directory. Locate only the credential needed for the authorized task. Never print values, copy them into documentation, commit them, or treat storage as permission to use them. Ask before every use of a stored sudo password. Use the host’s secret-entry tool if a missing credential is required.
 
 Real project environment files stay ignored and are synced through Vathavaran / Varte after authorized edits, using file paths and the confirmed repository/directory/environment destination. Read CLI help; report confirmed success or a specific pending blocker without values. Example files with placeholders do not need upload.
+
+## Select only the skills this task needs
+
+Read the installed skills’ descriptions and select by the actual request. Companion names refer to installed skills, not just folders in this source repository. Load their instructions before using them. If one is unavailable, report the material gap and use existing equivalent project artifacts rather than inventing a successful invocation.
+
+For a substantial feature with unresolved decisions, use grilling, then to-spec once settled, then to-tickets once the spec is agreed, then half-send for approved execution. These are stages, not four interviews. Do not begin implementation during requested planning-only work. A clear small edit can proceed directly to the relevant specialist and verification.
+
+For a marketing, product or portfolio website, default to design-taste-frontend. For app UI, dashboards and components, default to frontend-design. An explicit user choice or established design lead wins. Use eyes-of-render for implementation consistency with either lead; do not load both design leads by default.
+
+For ordinary assistant replies, use unslop. For text authored as Russel, use russelore. Use readme-rdp for README structure and rdp-commit for commit subjects. An explicit request for a particular voice wins. For testing, retries and completion checks, load the matching pstack principle only when that operation is part of the task. Correct, sharpen and in-your-own-words apply to their specific requests, not every task.
+
+When code review is requested or required, use gpt-6-luna in a dedicated T3 delegate_task with role review on the current enabled Codex provider. Leave the coding model unchanged. Each review or re-check is a fresh read-only review task; report unavailable Luna rather than substituting. This does not add a review to every task.
 
 ## Default workflow
 
