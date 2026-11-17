@@ -1,80 +1,199 @@
-<div align="center">
-  <img src="assets/icon.png" width="180" alt="">
-  <h1>The Mbappe Special</h1>
-  <p>My skills, the ones I keep borrowing, and how I use them together.</p>
-  <p>
-    <a href="#get-the-skills">Install</a> &nbsp;·&nbsp;
-    <a href="#how-i-use-them">The workflow</a> &nbsp;·&nbsp;
-    <a href="#the-collection">The collection</a>
-  </p>
-</div>
+# The Mbappe Special
 
----
+These are the skills I use. Some are mine, some are from other people, and I keep my copies here so I can customise them for how I work. Every install below points to this repo.
 
-I have my own skills, I use a bunch made by other people, and I wanted them in one place with a proper flow. So this is that. Made around how I work in [T3 Code](https://t3.codes), with the important questions asked before I disappear and the agent starts making decisions for me.
+## Russel Daniel Paul
 
-## Get the skills
+### [russelore](skills/russel/russelore/SKILL.md)
+
+My writing voice for website copy, blogs and text written as me.
 
 ```sh
-npx skills add wrestle-R/Mbappe-Special
+npx skills add wrestle-R/Mbappe-Special --skill russelore
 ```
 
-Pick what you want. Each skill works as a separate install too.
+### [half-send](skills/russel/half-send/SKILL.md)
+
+Asks the important questions first, then finishes the approved work while I’m away.
 
 ```sh
 npx skills add wrestle-R/Mbappe-Special --skill half-send
 ```
 
-Use the skill’s original name after `--skill`, like `grilling`, `unslop` or `frontend-design`.
+### [eyes-of-render](skills/russel/eyes-of-render/SKILL.md)
 
-## How I use them
+My project workflow and checks for a consistent UI that holds up on screen.
 
-**grilling → to-spec → to-tickets → half-send**
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill eyes-of-render
+```
 
-| Step | What happens |
-| :--- | :--- |
-| [grilling](skills/mattpocock/grilling/SKILL.md) | Ask the important questions, give me recommended answers, settle the decisions. |
-| [to-spec](skills/mattpocock/to-spec/SKILL.md) | Write down what we agreed to build. |
-| [to-tickets](skills/mattpocock/to-tickets/SKILL.md) | Split it into complete pieces with clear blockers. |
-| [half-send](skills/russel/half-send/SKILL.md) | I approve the work, then the agent gets on with it while I’m away. |
+### [rdp-commit](skills/russel/rdp-commit/SKILL.md)
 
-Set up the project’s tracker with [setup-matt-pocock-skills](skills/mattpocock/setup-matt-pocock-skills/SKILL.md) first. Answers carry forward through the steps. A small obvious fix doesn’t need the whole ceremony.
+Short casual commit names that sound like something I’d actually write.
 
-For UI, I pick [taste](skills/leonxlnx/design-taste-frontend/SKILL.md) or [Anthropic frontend-design](skills/anthropic/frontend-design/SKILL.md) for the direction. [Eyes of Render](skills/russel/eyes-of-render/SKILL.md) checks the implementation: the theme, the controls, the resizing, the actual thing on screen.
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill rdp-commit
+```
 
-For bugs, it’s **diagnose → reproduce → fix → prove**, using [diagnosing-bugs](skills/mattpocock/diagnosing-bugs/SKILL.md). Commit verified milestones along the way. Releases and deployments still need their own authorization.
+### [readme-rdp](skills/russel/readme-rdp/SKILL.md)
 
-## The collection
+A little backstory and the useful instructions, without making the README a whole project.
 
-| Mine | What it’s for |
-| :--- | :--- |
-| [half-send](skills/russel/half-send/SKILL.md) | Approved work while I’m away. |
-| [eyes-of-render](skills/russel/eyes-of-render/SKILL.md) | The workflow and UI checks I keep asking for. |
-| [russelore](skills/russel/russelore/SKILL.md) | Website copy, blogs and other text written as me. |
-| [rdp-commit](skills/russel/rdp-commit/SKILL.md) | Short casual commit names. |
-| [readme-rdp](skills/russel/readme-rdp/SKILL.md) | A little backstory, a useful visual, the instructions you need. |
-| [tagged-release](skills/russel/tagged-release/SKILL.md) | Sol handles the release, Luna waits, Sol handles the result. |
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill readme-rdp
+```
 
-<details>
-<summary><strong>The ones I borrow</strong></summary>
+### [tagged-release](skills/russel/tagged-release/SKILL.md)
 
-<br>
+Sol handles the release, Luna waits, and Sol handles the result; needs model delegation.
 
-| From | What I keep here |
-| :--- | :--- |
-| [Matt Pocock](skills/mattpocock/) | Grilling, specs, tickets, tracker setup and bug diagnosis. |
-| [pstack](skills/pstack/) | Unslop, sharper prompts, root-cause fixes, practical tests and proof that things work. |
-| [Leonxlnx](skills/leonxlnx/) | Taste for frontend art direction and design checks. |
-| [Anthropic](skills/anthropic/) | Frontend design. |
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill tagged-release
+```
 
-Unslop is for the agent’s replies and explanations to me. Russelore is for text written as me. Both have a job here.
+## pstack
 
-Upstream copies keep their original names, instructions and licenses. [The source manifest](upstream-sources.json) records the exact revisions.
+### [unslop](skills/pstack/unslop/SKILL.md)
 
-</details>
+Cuts AI writing patterns from the agent’s replies and explanations to me.
 
-<br>
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill unslop
+```
 
-[Which skills fit where](docs/skill-review.md) · [The full pstack review](docs/pstack-review.md)
+### [sharpen](skills/pstack/sharpen/SKILL.md)
 
-Taste’s tooling needs Node 22+ and Chromium. Tagged-release needs a host with model delegation and completion handoffs. Private working notes stay in ignored `local-docs/`.
+Makes a task more precise without making it bigger.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill sharpen
+```
+
+### [in-your-own-words](skills/pstack/in-your-own-words/SKILL.md)
+
+Checks that the agent understood what I’m trying to do.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill in-your-own-words
+```
+
+### [why](skills/pstack/why/SKILL.md)
+
+Finds the reasoning behind a decision from the actual project history.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill why
+```
+
+### [correct](skills/pstack/correct/SKILL.md)
+
+Turns mistakes the agent keeps repeating into fixes the repo can enforce.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill correct
+```
+
+### [tdd](skills/pstack/tdd/SKILL.md)
+
+Writes a focused failing regression test when there’s a practical way to test the bug.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill tdd
+```
+
+### [principle-fix-root-causes](skills/pstack/principle-fix-root-causes/SKILL.md)
+
+Finds where a bug started instead of patching where it showed up.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill principle-fix-root-causes
+```
+
+### [principle-prove-it-works](skills/pstack/principle-prove-it-works/SKILL.md)
+
+Checks the actual result before calling the work done.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill principle-prove-it-works
+```
+
+### [principle-test-behavior-not-implementation](skills/pstack/principle-test-behavior-not-implementation/SKILL.md)
+
+Tests what users and callers can observe.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill principle-test-behavior-not-implementation
+```
+
+### [principle-make-operations-idempotent](skills/pstack/principle-make-operations-idempotent/SKILL.md)
+
+Keeps retries, sync operations and installers from doing the same thing twice.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill principle-make-operations-idempotent
+```
+
+## Matt Pocock
+
+### [grilling](skills/mattpocock/grilling/SKILL.md)
+
+Works through the important decisions in question rounds with recommended answers.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill grilling
+```
+
+### [to-spec](skills/mattpocock/to-spec/SKILL.md)
+
+Turns the conversation into a spec of what we agreed to build.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill to-spec
+```
+
+### [to-tickets](skills/mattpocock/to-tickets/SKILL.md)
+
+Splits a spec into complete pieces of work with clear blockers.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill to-tickets
+```
+
+### [setup-matt-pocock-skills](skills/mattpocock/setup-matt-pocock-skills/SKILL.md)
+
+Configures the project tracker used by the spec and ticket skills.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill setup-matt-pocock-skills
+```
+
+### [diagnosing-bugs](skills/mattpocock/diagnosing-bugs/SKILL.md)
+
+Reproduces the reported bug, tests the cause and verifies the fix.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill diagnosing-bugs
+```
+
+## Leonxlnx
+
+### [design-taste-frontend](skills/leonxlnx/design-taste-frontend/SKILL.md)
+
+Frontend art direction and design checks, with tooling that needs Node 22+ and Chromium.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill design-taste-frontend
+```
+
+## Anthropic
+
+### [frontend-design](skills/anthropic/frontend-design/SKILL.md)
+
+Gives a frontend its own visual direction instead of another generic layout.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill frontend-design
+```
+
+Original sources and revisions are recorded in [the source manifest](upstream-sources.json). Upstream licenses stay with their skills.
