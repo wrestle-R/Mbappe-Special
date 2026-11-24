@@ -5,15 +5,17 @@ hooks:
   Stop:
   - hooks:
     - type: command
-      command: 'for f in ${CLAUDE_SKILL_DIR:+"$CLAUDE_SKILL_DIR/scripts/gate.mjs"} ${CLAUDE_PLUGIN_ROOT:+"$CLAUDE_PLUGIN_ROOT/scripts/gate.mjs"
-        "$CLAUDE_PLUGIN_ROOT/skills/taste-skill/scripts/gate.mjs"} ${CLAUDE_PROJECT_DIR:+"$CLAUDE_PROJECT_DIR/.claude/skills/design-taste-frontend/scripts/gate.mjs"
-        "$CLAUDE_PROJECT_DIR/.agents/skills/design-taste-frontend/scripts/gate.mjs"} ${HOME:+"$HOME/.claude/skills/design-taste-frontend/scripts/gate.mjs"
-        "$HOME/.agents/skills/design-taste-frontend/scripts/gate.mjs"}; do if [ -f "$f" ]; then exec node "$f" --hook
-        claude; fi; done; if [ -d .taste-skill ]; then printf "%s gate.mjs not found; CLAUDE_PLUGIN_ROOT=%s CLAUDE_PROJECT_DIR=%s
-        HOME=%s\n" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "${CLAUDE_PLUGIN_ROOT-}" "${CLAUDE_PROJECT_DIR-}" "${HOME-}"
-        > .taste-skill/gate-hook-missing.txt 2>/dev/null; fi; for d in .taste-skill */.taste-skill; do if [ -f "$d/build.json"
-        ]; then echo "tasteskill gate: gate.mjs not found (CLAUDE_PLUGIN_ROOT=${CLAUDE_PLUGIN_ROOT-}); the build
-        in $d is not checked" >&2; break; fi; done; exit 0'
+      command: >-
+        if [ -n "${CLAUDE_SKILL_DIR:-}" ]; then
+          f="$CLAUDE_SKILL_DIR/scripts/gate.mjs";
+          if [ -f "$f" ]; then exec node "$f" --hook claude; fi;
+        elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+          for f in "$CLAUDE_PLUGIN_ROOT/scripts/gate.mjs" "$CLAUDE_PLUGIN_ROOT/skills/taste-skill/scripts/gate.mjs"; do
+            if [ -f "$f" ]; then exec node "$f" --hook claude; fi;
+          done;
+        fi;
+        echo "tasteskill gate: gate.mjs unavailable in the loaded skill or plugin; stop allowed" >&2;
+        exit 0
       timeout: 600
 ---
 
@@ -24,6 +26,7 @@ every screen, and looks made for this client, not from a template and not like a
 figma.com and x.ai are the bar (in words: `layout-v4.md` section 1).
 
 `<skill>` is this folder. It needs Node 22+ and Chrome, Edge or Chromium (ffmpeg optional).
+Use an absolute path for a browser override (`CHROME_PATH`, or `CHROME` for the effects tool).
 
 ## House rules
 

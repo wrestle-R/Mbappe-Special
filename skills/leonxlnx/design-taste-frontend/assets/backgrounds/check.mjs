@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import zlib from 'node:zlib';
-import http from 'node:http';
+import { createPreviewServer } from '../../scripts/preview-server.mjs';
 import { fileURLToPath } from 'node:url';
 import { spawn, execFileSync } from 'node:child_process';
 
@@ -73,7 +73,7 @@ const lum = (r, g, b) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
 const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 
 /* ---------------------------------------------------------------- Chrome */
-const findChrome = () => ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', process.env.CHROME_PATH, '/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p => p && fs.existsSync(p));
+const findChrome = () => ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', process.env.CHROME_PATH, '/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p => p && path.isAbsolute(p) && fs.existsSync(p));
 const prof = path.resolve(profile); fs.mkdirSync(prof, { recursive: true });
 const portFile = path.join(prof, 'DevToolsActivePort'); try { fs.rmSync(portFile); } catch { /* none */ }
 const child = spawn(findChrome(), ['--headless=new', `--user-data-dir=${prof}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check',
@@ -83,12 +83,7 @@ const kill = () => { if (child.exitCode != null) return; try { execFileSync('tas
 const PORT = +opt('port', 5967);
 if (PORT < 5965 || PORT > 5969) { console.error('check: --port must be 5965-5969'); process.exit(1); }
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp' };
-const srv = http.createServer((req, res) => {
-  const file = path.join(SKILL, decodeURIComponent(new URL(req.url, 'http://x').pathname));
-  if (!file.startsWith(SKILL) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); return res.end(); }
-  res.writeHead(200, { 'content-type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'cache-control': 'no-store' });
-  fs.createReadStream(file).pipe(res);
-});
+const srv = createPreviewServer(SKILL, MIME);
 await new Promise((resolve, reject) => { srv.on('error', reject); srv.listen(PORT, '127.0.0.1', resolve); });
 const guard = setTimeout(() => { console.error('check: timed out'); kill(); process.exit(2); }, 25 * 60 * 1000);
 

@@ -144,9 +144,9 @@ function trace(decision, reason) {
 // with no build armed: the newest gate.json here or one or two folders below (a finished build's), else this folder's
 // .taste-skill when it exists; a new .taste-skill folder is never made for it
 function traceFile() {
-  const found = [base, ...below(1), ...below(2)].map(d => path.join(dotOf(d), 'gate.json')).filter(f => fs.existsSync(f));
+  const found = [base, ...below(1), ...below(2)].filter(safeHookState).map(d => path.join(dotOf(d), 'gate.json')).filter(f => fs.existsSync(f));
   found.sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
-  return found[0] || (fs.existsSync(dotOf(base)) ? path.join(dotOf(base), 'gate.json') : null);
+  return found[0] || (safeHookState(base) && fs.existsSync(dotOf(base)) ? path.join(dotOf(base), 'gate.json') : null);
 }
 const allow = (note, quiet) => { trace('allow', note || 'allowed'); if (note && !quiet) process.stderr.write('gate: ' + note + '\n'); process.exit(0); };
 // anything unexpected in hook mode lets the agent stop: a broken gate must not hold a session
@@ -177,8 +177,30 @@ const slash = p => p.split(path.sep).join('/');
 // ---------------------------------------------------------------- the project folder
 const dotOf = d => path.join(d, '.taste-skill');
 const OPEN_STATES = /^(active|fail|error)$/;
+function projectContains(project, file) {
+  try {
+    const rel = path.relative(fs.realpathSync(project), fs.realpathSync(file));
+    return rel !== '..' && !rel.startsWith('..' + path.sep) && !path.isAbsolute(rel);
+  } catch { return false; }
+}
+
+// A stop hook may run in a checkout whose marker and output paths came from the repository.
+function safeHookState(project) {
+  if (!HOOK) return true;
+  if (!projectContains(base, project)) return false;
+  const regularPath = (name, isDirectory) => {
+    try {
+      const st = fs.lstatSync(path.join(dotOf(project), name));
+      return isDirectory ? st.isDirectory() : st.isFile() && st.nlink === 1;
+    } catch (error) { return error.code === 'ENOENT'; }
+  };
+  return ['', 'gate', 'gate/consistency'].every(name => regularPath(name, true))
+    && ['build.json', 'build.done.json', 'gate.json', 'gate-blocks.json', 'unarmed.json', 'waivers.json',
+      'gate/consistency/report.json', 'gate/consistency/rendered.html'].every(name => regularPath(name, false));
+}
 // build.json, or a round state still open: deleting or renaming the marker mid-build does not end the build
 function activeIn(d) {
+  if (!safeHookState(d)) return false;
   if (fs.existsSync(path.join(dotOf(d), 'build.json'))) return true;
   const s = readJson(path.join(dotOf(d), 'gate.json'), null);
   return !!(s && typeof s.start === 'string' && OPEN_STATES.test(s.status || ''));
@@ -212,8 +234,9 @@ function unarmedPage() {
   for (const d of [base, ...below(1)]) {
     const f = path.join(d, 'index.html');
     try {
+      if (!safeHookState(d) || !projectContains(d, f)) continue;
       const st = fs.statSync(f);
-      if (st.size > 4e6 || Date.now() - st.mtimeMs > DAY) continue;
+      if (!st.isFile() || st.size > 4e6 || Date.now() - st.mtimeMs > DAY) continue;
       if (['build.done.json', 'unarmed.json'].some(x => fs.existsSync(path.join(dotOf(d), x)))) continue;
       if (/<meta\b[^>]*\bname\s*=\s*["']?page-type\b/i.test(fs.readFileSync(f, 'utf8'))) return { dir: d, file: f };
     } catch { /* no page here */ }
@@ -246,10 +269,10 @@ function findPage(proj, marker) {
   for (const p of [marker.page, 'index.html']) { if (typeof p !== 'string' || !p) continue; const f = fileAt(path.resolve(proj, p)); if (f) return { file: f }; }
   let names = [];
   try { names = fs.readdirSync(proj).filter(n => /\.html?$/i.test(n) && !/^credits/i.test(n)); } catch { /* none */ }
-  if (names.length === 1) return { file: path.join(proj, names[0]) };
+  if (names.length === 1) { const f = fileAt(path.join(proj, names[0])); if (f) return { file: f }; }
   // the page one folder down (site/index.html): only when one folder has one
   const subs = [];
-  try { for (const e of fs.readdirSync(proj, { withFileTypes: true })) if (e.isDirectory() && !SKIP_DIR.test(e.name) && !/^(src|assets|shots)$/.test(e.name)) { const f = path.join(proj, e.name, 'index.html'); if (fs.existsSync(f)) subs.push(f); } } catch { /* none */ }
+  try { for (const e of fs.readdirSync(proj, { withFileTypes: true })) if (e.isDirectory() && !SKIP_DIR.test(e.name) && !/^(src|assets|shots)$/.test(e.name)) { const f = fileAt(path.join(proj, e.name, 'index.html')); if (f) subs.push(f); } } catch { /* none */ }
   return subs.length === 1 ? { file: subs[0] } : null;
 }
 
@@ -274,13 +297,13 @@ function refsOf(file, text, root) {
 }
 const jsRefs = t => [...t.matchAll(/\b(?:import|export)\s*(?:[\w*{}\s,$]+\s*from\s*)?["']([^"']+)["']|\bimport\s*\(\s*["']([^"']+)["']\s*\)/g)].map(m => m[1] || m[2]).filter(r => /^\.{0,2}\//.test(r));
 const cssRefs = t => [...t.matchAll(/@import\s+(?:url\()?\s*["']?([^"')\s;]+)|url\(\s*["']?([^"')]+)["']?\s*\)/g)].map(m => m[1] || m[2]);
-function walk(page, root) {
+function walk(page, root, project) {
   const seen = new Set([page]), queue = [page];
   while (queue.length && seen.size < 600) {
     const f = queue.shift();
     if (!/\.(html?|m?js|css)$/i.test(f)) continue;
     let t; try { t = fs.readFileSync(f, 'utf8'); } catch { continue; }
-    for (const r of refsOf(f, t, root)) if (!seen.has(r) && fs.existsSync(r) && fs.statSync(r).isFile()) { seen.add(r); queue.push(r); }
+    for (const r of refsOf(f, t, root)) if (!seen.has(r) && (!HOOK || projectContains(project, r)) && fs.existsSync(r) && fs.statSync(r).isFile()) { seen.add(r); queue.push(r); }
   }
   return [...seen];
 }
@@ -294,11 +317,11 @@ function sourceFiles(proj) {
     for (const e of es) {
       const p = path.join(d, e.name);
       if (e.isDirectory()) { if (!SKIP_DIR.test(e.name) && !/^(dist|build|out|coverage|shots|\.vercel|\.output)$/.test(e.name)) go(p, depth + 1); }
-      else if (SRC_EXT.test(e.name) && !/^(package-lock|pnpm-lock|yarn)\b/.test(e.name)) out.push(p);
+      else if ((!HOOK || e.isFile()) && SRC_EXT.test(e.name) && !/^(package-lock|pnpm-lock|yarn)\b/.test(e.name)) out.push(p);
     }
   };
   for (const d of ['src', 'app', 'pages', 'components', 'lib', 'public']) go(path.join(proj, d), 0);
-  try { for (const n of fs.readdirSync(proj)) if (/\.(html?|m?[jt]s|json)$/i.test(n) && !/lock/i.test(n)) out.push(path.join(proj, n)); } catch { /* none */ }
+  try { for (const e of fs.readdirSync(proj, { withFileTypes: true })) if ((!HOOK || e.isFile()) && /\.(html?|m?[jt]s|json)$/i.test(e.name) && !/lock/i.test(e.name)) out.push(path.join(proj, e.name)); } catch { /* none */ }
   return out;
 }
 
@@ -460,7 +483,11 @@ const inProject = (p, name) => {
   return to;
 };
 const profileBase = () => path.resolve(typeof opt('profile') === 'string' ? inProject(opt('profile'), 'gate') : process.env.TASTE_SKILL_TMP ? path.join(process.env.TASTE_SKILL_TMP, 'chrome') : os.tmpdir());
-const freshProfile = name => { const d = path.join(profileBase(), `gate-${process.pid}-${name}-${Date.now().toString(36)}`); fs.mkdirSync(d, { recursive: true }); return d; };
+const freshProfile = name => {
+  const base = profileBase();
+  fs.mkdirSync(base, { recursive: true });
+  return fs.mkdtempSync(path.join(base, `taste-skill-gate-${name}-`));
+};
 // Chrome's helpers can hold the profile's files for a moment after it exits
 const rmProfile = d => { for (let i = 0; i < 20; i++) { try { fs.rmSync(d, { recursive: true, force: true }); return; } catch { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 250); } } };
 const parseJson = t => { try { return JSON.parse(t); } catch { const i = t.indexOf('{'), j = t.indexOf('['); const k = [i, j].filter(x => x >= 0).sort((a, b) => a - b)[0]; try { return k >= 0 ? JSON.parse(t.slice(k)) : null; } catch { return null; } } };
@@ -599,7 +626,7 @@ if (!START && !proj.dir) {
   console.log('GATE: OFF (no build active)'); process.exit(0);
 }
 // builds in two or more folders below: this session runs them (an orchestrator), it does not build one
-if (HOOK && proj.others) { T.file = fs.existsSync(dotOf(base)) ? path.join(dotOf(base), 'gate.json') : null; T.off = !T.file; }
+if (HOOK && proj.others) { T.file = safeHookState(base) && fs.existsSync(dotOf(base)) ? path.join(dotOf(base), 'gate.json') : null; T.off = !T.file; }
 if (HOOK && proj.others) allow(`builds are active in ${proj.others + 1} folders below ${base}; not holding this session`);
 const projDir = START ? (positional && !isUrl(positional) && activeIn(path.dirname(path.resolve(base, positional))) ? path.dirname(path.resolve(base, positional)) : base) : proj.dir;
 const dot = dotOf(projDir);
@@ -703,6 +730,10 @@ if (HOOK) {
 const print = HOOK ? () => {} : (...a) => console.log(...a);
 const HOW = `${GATE} --start <page.html> (a framework build: --start http://localhost:<port>/ with its dev server running, or --start dist/index.html --root dist after a build), then ${GATE}`;
 const P = findPage(projDir, marker);
+const root = typeof marker.root === 'string' && marker.root ? path.resolve(projDir, marker.root) : null;
+if (HOOK && ((P?.file && !projectContains(projDir, P.file)) || (root && !projectContains(projDir, root)))) {
+  allow('the configured page or preview root is outside the project or unavailable');
+}
 let html = '', setup = null;
 if (!P) setup = `no page was found in ${projDir}`;
 else if (P.url && !isLocalUrl(P.url)) setup = `${P.url} is not local: ${NOT_LOCAL}`;
@@ -727,10 +758,9 @@ if (setup) {
 
 const target = P.url || P.file;
 const relPage = P.url || slash(path.relative(projDir, P.file));
-const root = typeof marker.root === 'string' && marker.root ? path.resolve(projDir, marker.root) : null;
 const kind = (html && kindOf(html)) || (KINDS.test(marker.kind || '') ? marker.kind : '') || '';
 const opts = { kind, root, category: typeof marker.category === 'string' ? marker.category : '', primary: typeof marker.primary === 'string' ? marker.primary : '' };
-const walked = P.file ? walk(P.file, root || path.dirname(P.file)) : [];
+const walked = P.file ? walk(P.file, root || path.dirname(P.file), projDir) : [];
 const files = [...new Set([...walked, ...(P.url || fs.existsSync(path.join(projDir, 'package.json')) ? sourceFiles(projDir) : [])])];
 // the page, what it loads and what the checks are told; waivers are applied after the checks, so a new waiver needs no new run
 const fp = crypto.createHash('sha1');
