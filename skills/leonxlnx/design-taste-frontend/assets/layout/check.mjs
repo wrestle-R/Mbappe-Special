@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import http from 'node:http';
+import { createPreviewServer, previewRoot } from '../../scripts/preview-server.mjs';
 import { spawn, execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
@@ -47,7 +47,7 @@ const sizes = String(opt('sizes', '1440x900,1024x768,820x1180,768x1024,390x844')
 if (!target || target === true || rootArg === true) { console.error('usage: check.mjs --url <url or file> [--profile <dir in the OS temp folder or .taste-skill>] [--sizes 1440x900,1024x768,820x1180,768x1024,390x844] [--shots dir] [--root dir] [--json]'); process.exit(2); }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const chrome = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].find(p => p && fs.existsSync(p));
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].find(p => p && path.isAbsolute(p) && fs.existsSync(p));
 if (!chrome) { console.error('no Chrome found (set CHROME_PATH)'); process.exit(2); }
 const src = fs.readFileSync(path.join(here, 'layout-check.js'), 'utf8');
 // a page file is served from its folder (or --root) over http on 127.0.0.1 (5770-5779), never opened from file://
@@ -56,23 +56,12 @@ if (!/^https?:\/\//i.test(target)) {
   let file = path.resolve(/^file:/i.test(target) ? fileURLToPath(target) : target);
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
   if (!fs.existsSync(file)) { console.error(`check: no page at ${file}`); process.exit(2); }
-  // serve from high enough that the page's ../ references resolve
-  const ups = Math.max(0, ...[...fs.readFileSync(file, 'utf8').matchAll(/(?:(?:src|href)\s*=\s*|\bfrom\s*|\bimport\s*\(?\s*|url\(\s*)["']?((?:\.\.\/)+)/g)].map(m => m[1].length / 3));
-  let root = path.dirname(file); for (let i = 0; i < ups; i++) root = path.dirname(root);
-  if (rootArg) { root = path.resolve(rootArg); const rel = path.relative(root, file); if (rel.split(path.sep)[0] === '..' || path.isAbsolute(rel)) { console.error(`check: the page is not inside --root ${root}: ${file}`); process.exit(2); } }
+  let root;
+  try { root = previewRoot(file, rootArg); } catch (error) { console.error('check: ' + error.message); process.exit(2); }
   const MIME = { '.html': 'text/html; charset=utf-8', '.htm': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml',
     '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.gif': 'image/gif', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf', '.otf': 'font/otf',
     '.mp4': 'video/mp4', '.webm': 'video/webm', '.glb': 'model/gltf-binary', '.txt': 'text/plain', '.ico': 'image/x-icon' };
-  server = http.createServer((req, res) => {
-    try {
-      let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-      if (p.endsWith('/')) p += 'index.html';
-      const f = path.join(root, p);
-      if (!(f === root || f.startsWith(root + path.sep)) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); res.end('not found'); return; }
-      res.writeHead(200, { 'Content-Type': MIME[path.extname(f).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-store' });
-      res.end(fs.readFileSync(f));
-    } catch { res.writeHead(404); res.end('not found'); }
-  });
+  server = createPreviewServer(root, MIME, { index: 'slash' });
   let port = 0;
   for (let p = 5770; p <= 5779 && !port; p++) port = await new Promise(r => { server.once('error', () => r(0)); server.listen(p, '127.0.0.1', () => r(p)); });
   if (!port) { console.error('check: no free port in 5770-5779'); process.exit(2); }

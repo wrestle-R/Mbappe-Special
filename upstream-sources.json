@@ -62,7 +62,8 @@
     "local_customizations": [
       "Task-specific description for automatic selection",
       "Automatic invocation enabled in agents/openai.yaml",
-      "Removed explicit-only frontmatter where present"
+      "Removed explicit-only frontmatter where present",
+      "Restricted automatic gate execution and bounded preview files and browser profiles"
     ]
   },
   {

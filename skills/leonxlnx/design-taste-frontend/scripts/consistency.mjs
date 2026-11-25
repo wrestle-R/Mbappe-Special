@@ -278,8 +278,8 @@
 // not named index.html, so two pages in one folder keep their own), or to a temp folder for a URL: never into the current
 // directory.
 import { spawn, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, rmSync, writeFileSync, statSync, createReadStream, readdirSync, unlinkSync, readFileSync } from 'node:fs';
-import { createServer } from 'node:http';
+import { existsSync, mkdirSync, rmSync, writeFileSync, statSync, readdirSync, unlinkSync, readFileSync } from 'node:fs';
+import { createPreviewServer, previewRoot } from './preview-server.mjs';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname, basename, extname, relative, sep, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -4573,20 +4573,10 @@ else {
   let file = resolve(/^file:/i.test(target) ? fileURLToPath(target) : target); // (file:///home/x keeps its slash)
   if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
   if (!existsSync(file)) { console.error('No such file: ' + file); process.exit(2); }
-  // serve from high enough that the page's ../ references resolve
-  const ups = Math.max(0, ...[...readFileSync(file, 'utf8').matchAll(/(?:(?:src|href)\s*=\s*|\bfrom\s*|\bimport\s*\(?\s*|url\(\s*)["']?((?:\.\.\/)+)/g)].map((m) => m[1].length / 3));
-  let root = dirname(file); for (let i = 0; i < ups; i++) root = dirname(root);
-  if (ROOT) { root = resolve(ROOT); const rel = relative(root, file); if (rel.split(sep)[0] === '..' || isAbsolute(rel)) { console.error(`The page is not inside --root ${root}: ${file}`); process.exit(2); } }
+  let root;
+  try { root = previewRoot(file, ROOT); } catch (error) { console.error('consistency: ' + error.message); process.exit(2); }
   serveRoot = root;
-  server = createServer((req, res) => {
-    try {
-      let f = resolve(join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname)));
-      if (f !== root && !f.startsWith(root + sep)) { res.writeHead(403); return res.end(); }
-      if (statSync(f).isDirectory()) f = join(f, 'index.html');
-      res.writeHead(200, { 'content-type': MIME[extname(f).toLowerCase()] || 'application/octet-stream', 'content-length': statSync(f).size, 'cache-control': 'no-store' });
-      createReadStream(f).pipe(res);
-    } catch { res.writeHead(404); res.end('not found'); }
-  });
+  server = createPreviewServer(root, MIME, { index: 'directory' });
   // the default range is 5200-5299; a --port outside it gets that port and the next 9
   const port = await listenFree(server, PORT, PORT >= 5200 && PORT <= 5299 ? 5299 : PORT + 9);
   url = `http://127.0.0.1:${port}/${relative(root, file).split(sep).map(encodeURIComponent).join('/')}`;
@@ -4599,7 +4589,7 @@ for (const f of readdirSync(outDir)) if (/^(sweep-)?\d{3,4}-.+\.jpg$/.test(f)) u
 // ---------------------------------------------------------------- our own Chrome: own profile, stopped by its own PID
 function findChrome() {
   const env = process.env.CHROME_PATH;
-  if (env && existsSync(env)) return env;
+  if (env && isAbsolute(env) && existsSync(env)) return env;
   const local = process.env.LOCALAPPDATA || '', pf = process.env.PROGRAMFILES || 'C:\\Program Files', pf86 = process.env['PROGRAMFILES(X86)'] || 'C:\\Program Files (x86)';
   const home = process.env.HOME || process.env.USERPROFILE || '';
   const list = [
@@ -4609,7 +4599,7 @@ function findChrome() {
     join(home, 'Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),
     '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/snap/bin/chromium',
   ];
-  return list.find((c) => c && existsSync(c)) || null;
+  return list.find((c) => isAbsolute(c) && existsSync(c)) || null;
 }
 async function launch() {
   if (typeof WebSocket === 'undefined') throw new Error('Node 22+ is required (no built-in WebSocket in ' + process.version + ')');

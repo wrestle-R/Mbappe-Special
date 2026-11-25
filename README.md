@@ -2,6 +2,8 @@
 
 These are the skills I use. Some are mine, some are from other people, and I keep my copies here so I can customise them for how I work. Every install below points to this repo.
 
+Skills can run code in your agent session. The examples below leave the installer version and repository revision open. For a reproducible install, use a trusted version of the `skills` CLI and install from a local checkout at a commit you have reviewed. Review updates before installing them too.
+
 ## My Skills
 
 ### [russelore](skills/russel/russelore/SKILL.md)

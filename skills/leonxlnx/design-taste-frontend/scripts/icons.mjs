@@ -485,7 +485,7 @@ async function checkCmd() {
 
 /* ------------------------------------------------------------ measure: the true drawn box of every colour mark
    `measure` renders each curated colour mark once in headless Chrome (CPU WebGL flags, its own profile, closed by its
-   own PID; --profile: a folder of its own in the OS temp folder or the project's .taste-skill folder, never outside
+   own PID; --profile: the parent directory for a temporary profile, in the OS temp folder or the project's .taste-skill folder, never outside
    the project, else .taste-skill/chrome-icons) and asks the browser for the box the drawing really fills (getBBox, with every transform, use and nested group
    resolved: the path-point reader above gives up on those). The boxes go into index.json "boxes" keyed by icon id, and
    fetch crops to them. Needs a Chrome (CHROME_PATH or the usual places); run it when the curated list changes. */
@@ -493,8 +493,7 @@ async function measureCmd() {
   noCrop = true;
   const { spawn, execFileSync } = await import('node:child_process');
   const idx = loadIndex();
-  // default Chrome profile folder: --profile, else $TASTE_SKILL_TMP/chrome/<tool>-<pid>, else a fresh folder under the system temp dir
-  const defaultProfile = () => process.env.TASTE_SKILL_TMP ? path.join(process.env.TASTE_SKILL_TMP, 'chrome', 'icons-' + process.pid) : path.join(os.tmpdir(), 'taste-skill-icons-' + process.pid);
+  const defaultProfileBase = () => process.env.TASTE_SKILL_TMP ? path.join(process.env.TASTE_SKILL_TMP, 'chrome') : os.tmpdir();
   // a profile stays in the OS temp folder or the project: a relative --profile that leads out of this folder (or the folder
   // itself) goes to .taste-skill/chrome-<name>
   const inProject = (p, name) => {
@@ -505,8 +504,9 @@ async function measureCmd() {
     console.error(`${name}: --profile ${p} ${out ? 'leads outside the project folder' : 'is the project folder itself'}; using ${to} (a profile goes in the OS temp folder or the project's .taste-skill folder)`);
     return to;
   };
-  const profile = opt('profile') ? inProject(opt('profile'), 'icons') : path.resolve(defaultProfile());
-  const chromePath = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p => p && fs.existsSync(p));
+  const profileArg = opt('profile');
+  const profileBase = typeof profileArg === 'string' ? inProject(profileArg, 'icons') : defaultProfileBase();
+  const chromePath = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome', '/usr/bin/chromium', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(p => p && path.isAbsolute(p) && fs.existsSync(p));
   if (!chromePath) { console.error('icons: no Chrome found (set CHROME_PATH)'); process.exit(1); }
   const seen = new Set(), items = [];
   for (const a of [...idx.apps, ...idx.files]) {
@@ -517,8 +517,8 @@ async function measureCmd() {
     const vb = (r.svg.match(/viewBox="([^"]+)"/) || [])[1];
     items.push({ key: a.icon, svg: r.svg.replace(/viewBox="[^"]+"/, `viewBox="${vb}"`), vb: vb.split(/\s+/).map(Number), x, y });
   }
-  fs.rmSync(profile, { recursive: true, force: true });
-  fs.mkdirSync(profile, { recursive: true });
+  fs.mkdirSync(profileBase, { recursive: true });
+  const profile = fs.mkdtempSync(path.join(profileBase, 'taste-skill-icons-'));
   const child = spawn(chromePath, ['--headless=new', `--user-data-dir=${profile}`, '--remote-debugging-port=0', '--no-first-run', '--no-default-browser-check', '--disable-extensions', '--mute-audio', '--disable-gpu', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', 'about:blank'], { stdio: 'ignore' });
   const killChrome = () => { try { if (process.platform === 'win32') execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], { stdio: 'ignore' }); else child.kill('SIGKILL'); } catch {} };
   try {
@@ -553,7 +553,10 @@ async function measureCmd() {
     idx.boxes = o;
     fs.writeFileSync(INDEX, JSON.stringify(idx, null, 1));
     console.log(`measured ${n} of ${items.length} colour marks (${hidden} skipped as implausible), written to index.json boxes`);
-  } finally { killChrome(); }
+  } finally {
+    killChrome();
+    fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+  }
 }
 
 /* ------------------------------------------------------------ scan: every icon a page names, fetched at once

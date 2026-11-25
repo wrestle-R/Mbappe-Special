@@ -35,7 +35,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import http from 'node:http';
+import { createPreviewServer } from './preview-server.mjs';
 import { spawn, execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { pick as dealEffects, filterEffects, SLOTS, KINDS } from '../assets/effects/pick.js';
@@ -368,16 +368,7 @@ function serve(a) {
   const port = parseInt(a.port ?? 5230, 10);
   if (port === 3000) die('serve: port 3000 is reserved; use 5200-5299');
   const root = path.resolve(a.root || ROOT);
-  const server = http.createServer((req, res) => {
-    let rel;
-    try { rel = decodeURIComponent(new URL(req.url, 'http://x').pathname); } catch (_) { res.writeHead(400).end(); return; }
-    let file = path.resolve(root, '.' + rel);
-    if (!file.startsWith(root)) { res.writeHead(403).end(); return; }
-    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
-    if (!fs.existsSync(file)) { res.writeHead(404, { 'content-type': 'text/plain' }).end('not found'); return; }
-    res.writeHead(200, { 'content-type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'cache-control': 'no-store' });
-    fs.createReadStream(file).pipe(res);
-  });
+  const server = createPreviewServer(root, MIME, { index: 'directory' });
   server.listen(port, '127.0.0.1', () => console.log(`serving ${root} at http://localhost:${port}/  (gallery: /assets/effects/gallery.html)`));
 }
 
@@ -386,7 +377,7 @@ function serve(a) {
 function findChrome() {
   const c = [process.env.CHROME, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean);
-  const f = c.find(p => fs.existsSync(p));
+  const f = c.find(p => path.isAbsolute(p) && fs.existsSync(p));
   if (!f) die('no Chrome found (set CHROME=path)');
   return f;
 }

@@ -54,7 +54,7 @@ import path from 'node:path';
 import os from 'node:os';
 import zlib from 'node:zlib';
 import { spawn, execFileSync } from 'node:child_process';
-import http from 'node:http';
+import { createPreviewServer, previewRoot } from './preview-server.mjs';
 import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
@@ -90,19 +90,9 @@ if (!/^https?:\/\//i.test(url)) {
   let file = path.resolve(/^file:/i.test(url) ? fileURLToPath(url) : url);
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
   if (!fs.existsSync(file)) { console.error('shoot: no such file: ' + file); process.exit(1); }
-  // served from high enough that the page's ../ references resolve
-  const ups = Math.max(0, ...[...fs.readFileSync(file, 'utf8').matchAll(/(?:(?:src|href)\s*=\s*|\bfrom\s*|\bimport\s*\(?\s*|url\(\s*)["']?((?:\.\.\/)+)/g)].map((m) => m[1].length / 3));
-  let root = path.dirname(file); for (let i = 0; i < ups; i++) root = path.dirname(root);
-  if (rootArg) { root = path.resolve(rootArg); const rel = path.relative(root, file); if (rel.split(path.sep)[0] === '..' || path.isAbsolute(rel)) { console.error(`shoot: the page is not inside --root ${root}: ${file}`); process.exit(2); } }
-  server = http.createServer((req, res) => {
-    try {
-      let f = path.resolve(path.join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname)));
-      if (f !== root && !f.startsWith(root + path.sep)) { res.writeHead(403); return res.end(); }
-      if (fs.statSync(f).isDirectory()) f = path.join(f, 'index.html');
-      res.writeHead(200, { 'content-type': MIME[path.extname(f).toLowerCase()] || 'application/octet-stream', 'content-length': fs.statSync(f).size, 'cache-control': 'no-store' });
-      fs.createReadStream(f).pipe(res);
-    } catch { res.writeHead(404); res.end('not found'); }
-  });
+  let root;
+  try { root = previewRoot(file, rootArg); } catch (error) { console.error('shoot: ' + error.message); process.exit(2); }
+  server = createPreviewServer(root, MIME, { index: 'directory' });
   const from = Number(opt('port', 5300)), to = from >= 5300 && from <= 5399 ? 5399 : from + 9;
   const port = await new Promise((res, rej) => {
     let p = from;
@@ -116,7 +106,7 @@ function findChrome() {
   const local = process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google/Chrome/Application/chrome.exe') : null;
   const c = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', local,
     'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'];
-  const f = c.find(p => p && fs.existsSync(p));
+  const f = c.find(p => p && path.isAbsolute(p) && fs.existsSync(p));
   if (!f) throw new Error('no Chrome found (set CHROME_PATH)');
   return f;
 }

@@ -33,7 +33,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import http from 'node:http';
+import { createPreviewServer } from '../../../scripts/preview-server.mjs';
 import { spawn, execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from './build.js';
@@ -72,12 +72,7 @@ if (bad || opt('check')) process.exit(bad ? 1 : 0);
 
 // 2. the posters and stills, in a headless Chrome
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.webp': 'image/webp', '.css': 'text/css' };
-const server = http.createServer((req, res) => {
-  const p = path.join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname));
-  if (!p.startsWith(root) || !fs.existsSync(p) || fs.statSync(p).isDirectory()) { res.writeHead(404); res.end(); return; }
-  res.writeHead(200, { 'content-type': MIME[path.extname(p)] || 'application/octet-stream', 'cache-control': 'no-store' });
-  fs.createReadStream(p).pipe(res);
-});
+const server = createPreviewServer(root, MIME);
 let port = +opt('port', 5905);
 for (let i = 0; ; i++) {
   if (port === 3000) port++;
@@ -90,7 +85,7 @@ function findChrome() {
   const local = process.env.LOCALAPPDATA ? path.join(process.env.LOCALAPPDATA, 'Google/Chrome/Application/chrome.exe') : null;
   const c = [process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', local,
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium'];
-  const f = c.find(p => p && fs.existsSync(p));
+  const f = c.find(p => p && path.isAbsolute(p) && fs.existsSync(p));
   if (!f) throw new Error('no Chrome found (set CHROME_PATH)');
   return f;
 }
