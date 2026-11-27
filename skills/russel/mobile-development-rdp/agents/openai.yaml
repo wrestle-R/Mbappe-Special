@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mobile Development RDP"
+  short_description: "Build Android APKs, test devices, and fix releases"
+  default_prompt: "Use $mobile-development-rdp to build this Android app in CI, test the APK, or recover its existing release tag."
+
+policy:
+  allow_implicit_invocation: true

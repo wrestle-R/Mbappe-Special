@@ -54,6 +54,14 @@ Sol handles the release, Luna waits, and Sol handles the result; needs model del
 npx skills add wrestle-R/Mbappe-Special --skill tagged-release
 ```
 
+### [mobile-development-rdp](skills/russel/mobile-development-rdp/SKILL.md)
+
+My Android workflow for cloud APK builds, emulator and USB testing, and fixing failed releases on the same tag.
+
+```sh
+npx skills add wrestle-R/Mbappe-Special --skill mobile-development-rdp
+```
+
 ### [skeuomorphism-ui](skills/russel/skeuomorphism-ui/SKILL.md)
 
 Builds tactile React interfaces with raised controls, recessed fields and Gavin’s Skeuomorphism UI components.
